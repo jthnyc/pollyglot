@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <script src="index.js" type="module"></script>
+        <div class="main">
+            <div class="hero">
+                <img class="hero__image" src="assets/parrot.png"/>
+                <div class="hero-text">
+                    <h1 class="hero-text__title">Pollyglot</h1>
+                    <span class="hero-text__subtext">Perfect Translation Every Time</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="translator">
+                    <div class="translation-input">
+                        <h3 class="translation-input__title">Text to Translate</h3>
+                        <h3 class="translation-input__title-original hidden">Original Text</h3>
+                        <h3 class="translation-input__title hidden error">Please enter text below</h3>
+                        <textarea class="translation-input__textarea"></textarea>
+                    </div>
+                    <div class="language-select">
+                        <h3 class="language-select__title">Select Language</h3>
+                        <div class="language-select__options">
+                            <div class="language-select__option">
+                                <input type="radio" id="fr" name="language" value="French" checked />
+                                <label for="fr">French</label>
+                                <img class="language-select__image" src="assets/fr.png" alt="French flag" />
+                            </div>
+                            <div class="language-select__option">
+                                <input type="radio" id="sp" name="language" value="Spanish" />
+                                <label for="sp">Spanish</label>
+                                <img class="language-select__image" src="assets/sp.png" alt="Spanish flag" />
+                            </div>
+                            <div class="language-select__option">
+                                <input type="radio" id="jp" name="language" value="Japanese" />
+                                <label for="jp">Japanese</label>
+                                <img class="language-select__image" src="assets/jp.png" alt="Japanese flag" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="translation hidden">
+                        <h3 class="translation__title">Your Translation</h3>
+                        <textarea class="translation__textarea" readonly></textarea>
+                    </div>
+                    <button class="translate-cta">Translate</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

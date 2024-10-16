@@ -1,0 +1,144 @@
+:root {
+    --primary-black: #000000;
+    --primary-red: #FF0000;
+    --primary-white: #FFFFFF;
+    --light-gray: #D3D3D3;
+    --medium-electric-blue: #035A9D;
+    --anti-flash-white: #EFF0F4;
+    --lime-green: #32CD32;
+}
+
+body {
+    font-family: "Poppins";
+    margin: 0;
+}
+
+input,
+textarea,
+button {
+    font-family: inherit;
+}
+
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+/* MAIN */
+.main {
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    min-height: 100vh;
+}
+
+/* HERO */
+.hero {
+    align-items: center;
+    background-image: url("assets/World_Map_1.png");
+    display: flex;
+    height: 213px;
+    justify-content: center;
+}
+
+.hero-text__title {
+    color: var(--lime-green);
+}
+
+.hero-text__subtext {
+    color: var(--primary-white);
+}
+
+/* CONTENT */ 
+.content {
+    background-color: var(--primary-white);
+    min-height: 75vh;
+    padding: 1.875rem 1rem;
+}
+
+.translator {
+    align-content: center;
+    border: 0.25rem solid var(--primary-black);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.translation-input,
+.language-select,
+.translation {
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem 1.5rem;
+}
+
+.translation-input__title,
+.translation-input__original,
+.language-select__title,
+.translation__title {
+    color: var(--medium-electric-blue);
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.translation-input__textarea,
+.translation__textarea {
+    background-color: var(--anti-flash-white);
+    border: 1px solid var(--anti-flash-white);
+    border-radius: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
+    min-height: 118px;
+    padding: 0.75rem 0.625rem;
+    resize: none;
+}
+
+.language-select__options {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    padding-left: 1.5rem;
+    margin-top: 0.625rem;
+}
+
+.language-select__option {
+    align-items: center;
+    column-gap: 1rem;
+    display: flex;
+}
+
+.language-select__image {
+    border: 1px solid var(--primary-black);
+    height: 1.25rem;
+}
+
+/* BUTTON */
+.translate-cta {
+    background-color: var(--medium-electric-blue);
+    border: 0.0625rem solid var(--medium-electric-blue);
+    border-radius: 0.5rem;
+    color: var(--primary-white);
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin: 1.5rem 1.3125rem;
+    min-height: 3.125rem;
+    padding: .5rem 1.5rem;
+}
+
+.translate-cta--disabled {
+    background-color: var(--light-gray);
+    border-color: var(--light-gray);
+}
+
+/* helper classes */
+.hidden {
+    display: none;
+}
+
+.error {
+    color: var(--primary-red);
+}
