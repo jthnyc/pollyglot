@@ -26,7 +26,7 @@ button:focus {
 
 /* MAIN */
 .main {
-    background-color: lightblue;
+    background-color: var(--primary-black);
     display: flex;
     flex-direction: column;
     font-size: 1.5rem;
@@ -76,7 +76,7 @@ button:focus {
 }
 
 .translation-input__title,
-.translation-input__original,
+.translation-input__title-secondary,
 .language-select__title,
 .translation__title {
     color: var(--medium-electric-blue);
