@@ -2,13 +2,11 @@ const availableLanguages = ['fr', 'sp', 'jp'];
 const translateText = 'Translate';
 const startOverText = 'Start Over';
 
-// selectors
 const inputTitle = document.querySelector('.translation-input__title');
 const textInputArea = document.querySelector('.translation-input__textarea');
 const languageOptions = document.querySelectorAll('.language-select__option');
 const translateCTA = document.querySelector('.translate-cta');
 
-// initial values 
 let selectedLanguage = availableLanguages[0];
 let textToTranslate = '';
 
