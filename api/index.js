@@ -96,7 +96,7 @@ function handleCTA() {
     toggleUIDisplay();
     if (textToTranslate.length && !translationSection.classList.contains('hidden')) {
         const translationJSON = fetchTranslation();
-        translationJSON.then(translation => renderTranslation(translation.content))
+        translationJSON && translationJSON.then(translation => renderTranslation(translation.content))
     }
 }
 
