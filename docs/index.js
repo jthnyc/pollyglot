@@ -76,6 +76,7 @@ function toggleUIDisplay() {
         languageSelectSection.classList.remove('hidden');
         translationSection.classList.add('hidden');
         translationTextArea.value = '';
+        textInputArea.value = '';
         translateCTA.innerText = translateText;
     } else {
         inputTitle.classList.add('hidden');
