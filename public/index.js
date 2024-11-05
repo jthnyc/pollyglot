@@ -75,6 +75,7 @@ function toggleUIDisplay() {
         secondaryInputTitle.classList.add('hidden');
         languageSelectSection.classList.remove('hidden');
         translationSection.classList.add('hidden');
+        textToTranslate = '';
         translationTextArea.value = '';
         textInputArea.value = '';
         translateCTA.innerText = translateText;
@@ -112,6 +113,9 @@ async function fetchTranslation() {
                 'language': selectedLanguage
             })
         });
+        if (!response.ok) {
+            console.error('Request failed: ', response);
+        }
         const translationJSON = await response.json();
         return translationJSON;
     } catch (error) {
