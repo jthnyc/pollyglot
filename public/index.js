@@ -1,4 +1,4 @@
-const availableLanguages = ['French', 'Spanish', 'Japanese'];
+const availableLanguages = ['French', 'Spanish', 'Japanese', 'German', 'Italian', 'Chinese', 'Klingon', 'Quenya', 'Esperanto'];
 const translateText = 'Translate';
 const startOverText = 'Start Over';
 
@@ -37,6 +37,7 @@ function findClosestOption(e) {
 }
 
 function updateRadioSelection(selectedLanguage) {
+    console.log('selectedLanguage: ', selectedLanguage)
     languageOptions.forEach(option => {
         const radioInput = option.querySelector('input');
         radioInput.removeAttribute('checked');
