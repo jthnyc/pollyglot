@@ -20,7 +20,6 @@ app.post('/gpt', async (req, res) => {
     res.send(response);
 })
 
-
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
@@ -29,7 +28,7 @@ export async function fetchTextCompletion(prompt, language) {
     const completion = await openai.chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
-            { role: 'system', content: 'You are a translator who only provides the translation.' },
+            { role: 'system', content: 'You are a translator who only provides the translation. If Chinese, please provide traditional Chinese.' },
             {
                 role: 'user',
                 content: `Translate ${prompt} to ${language}.`,
