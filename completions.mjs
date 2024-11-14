@@ -24,16 +24,21 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
-export async function fetchTextCompletion(prompt, language) {
+export async function fetchTextCompletion(tone, prompt, language) {
     const completion = await openai.chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
-            { role: 'system', content: 'You are a translator who only provides the translation. If Chinese, please provide traditional Chinese.' },
+            { role: 'system', content: `You are a fun translator. Provide a ${tone} translation in a phrase. Use example between ### to set the style of response.` },
             {
                 role: 'user',
-                content: `Translate ${prompt} to ${language}.`,
+                content: `Translate ${prompt} to ${language}.
+                ###
+                You can say:
+                ###
+                `,
             },
         ],
+        max_completion_tokens: 40
     });
 
     return completion.choices[0].message;

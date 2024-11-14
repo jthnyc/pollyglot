@@ -22,10 +22,23 @@
             <div class="content">
                 <div class="translator">
                     <div class="translation-input">
-                        <h3 class="translation-input__title">Text to Translate</h3>
+                        <h3 class="translation-input__title">How do you say...</h3>
                         <h3 class="translation-input__title-secondary hidden">Original text</h3>
                         <h3 class="translation-input__title hidden error">Please enter text below</h3>
                         <textarea class="translation-input__textarea"></textarea>
+                    </div>
+                    <div class="tone-select">
+                        <h3 class="tone-select__title">Tone</h3>
+                        <div class="tone-select__options">
+                            <div class="tone-select__option">
+                                <input type="radio" id="formal" name="tone" value="formal" checked />
+                                <label class="tone-select__label" for="formal">Formal</label>
+                            </div>
+                            <div class="tone-select__option">
+                                <input type="radio" id="colloquial" name="tone" value="colloquial" />
+                                <label class="tone-select__label" for="colloquial">Colloquial</label>
+                            </div>
+                        </div>
                     </div>
                     <div class="language-select">
                         <h3 class="language-select__title">Select Language</h3>
@@ -78,7 +91,7 @@
                         </div>
                     </div>
                     <div class="translation hidden">
-                        <h3 class="translation__title">Your translation</h3>
+                        <h3 class="translation__title"></h3>
                         <textarea class="translation__textarea" readonly></textarea>
                     </div>
                     <button class="translate-cta translate-cta--disabled">Translate</button>
