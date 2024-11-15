@@ -4,6 +4,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
+// import { writeFileSync, readFileSync } from "node:fs";
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -26,21 +27,30 @@ const openai = new OpenAI({
 });
 
 export async function fetchTextCompletion(tone, prompt, language) {
-    const completion = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+    let completion = await openai.chat.completions.create({
+        model: "gpt-4o-audio-preview",
+        modalities: ["text", "audio"],
+        audio: { voice: "alloy", format: "mp3" },
         messages: [
-            { role: 'system', content: `You are a helpful translator. Provide the translation in a phrase. Use example between ### to set the style of response.` },
             {
                 role: 'user',
-                content: `Translate ${prompt} to ${tone} ${language}.
-                ###
-                You can say:
-                ###
-                `,
+                content: `Translate ${prompt} to ${tone} ${language} without repeating the phrase in English.`,
             },
         ],
-        max_completion_tokens: 40
     });
+    // console.log('completion: ', completion.choices[0].message.audio.data)
 
+    // writeFileSync(
+    //     "translation.mp3",
+    //     Buffer.from(completion.choices[0].message.audio.data, 'base64'),
+    //     { encoding: "utf-8" }
+    // );
+
+    const bufferArray = Array.from(Buffer.from(completion.choices[0].message.audio.data, 'base64'));
+    // const audioBlob = new Blob(bufferArray, { 'type': 'audio/mp3;' });
+    // const audioURL = URL.createObjectURL(audioBlob);
+    // console.log('bufferArray: ', bufferArray);
+    // console.log('audioURL: ', audioURL);
+    completion.choices[0].message.bufferArray = bufferArray
     return completion.choices[0].message;
 }
