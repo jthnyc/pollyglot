@@ -226,6 +226,12 @@ button:focus {
     height: 1.25rem;
 }
 
+.translation__audio {
+    margin: .25rem 1rem;
+    width: 95%;
+    background: #fff;
+}
+
 /* BUTTON */
 .translate-cta {
     background-color: var(--medium-electric-blue);

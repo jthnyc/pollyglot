@@ -13,6 +13,7 @@ const translateCTA = document.querySelector('.translate-cta');
 let selectedTone = 'formal'
 let selectedLanguage = availableLanguages[0];
 let textToTranslate = '';
+let audioURL = '';
 
 function setEventListeners() {
     textInputArea.addEventListener('input', () => {
@@ -125,7 +126,11 @@ function handleCTA() {
     toggleUIDisplay();
     if (textToTranslate.length && !translationSection.classList.contains('hidden')) {
         const translationJSON = fetchTranslation();
-        translationJSON && translationJSON.then(translation => renderTranslation(translation.content))
+        translationJSON && translationJSON.then(translation => {
+            console.log('data: ', translation)
+            renderTranslation(translation.audio.transcript);
+            handleAudio(translation.bufferArray);
+        })
     }
 }
 
@@ -154,6 +159,28 @@ async function fetchTranslation() {
 
 function renderTranslation(translation) {
     translationTextArea.value = translation;
+}
+
+function handleAudio(bufferArray) {
+    const audioPlayer = document.querySelector('.translation__audio');
+    // const newURL = window.URL.createObjectURL(audioURL);
+    // console.log('newURL: ', audionewURLURL);
+    // audioPlayer.src = newURL;
+    // audioPlayer.play();
+    const audioBlob = new Blob(bufferArray, { 'type': 'audio/mp3;' });
+    const audioURL = window.URL.createObjectURL(audioBlob);
+    console.log('audioURL: ', audioURL);
+    audioPlayer.src = audioURL;
+    // Buffer
+    // put buffer in blob
+    // blob in ArrayBuffer
+    // playAudio()
+    // const audioBlob = new Blob(translation.audio.data, { 'type': 'audio/mp3;' });
+    // const audioURL = window.URL.createObjectURL(audioBlob);
+    // const audioBuffer = new ArrayBuffer(8, { maxByteLength: 16 });
+    // const audioURL = window.URL.createObjectURL('')
+    // console.log('data: ', translation.audio.data)
+    // console.log('audioURL: ', audioURL)
 }
 
 setEventListeners();
