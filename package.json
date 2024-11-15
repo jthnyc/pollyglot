@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "completions": "node completions.mjs"
+    "start": "node completions.mjs"
   },
   "dependencies": {
     "body-parser": "^1.20.3",
