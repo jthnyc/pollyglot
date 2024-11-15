@@ -14,9 +14,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(3000, () => console.log('Server running on port 3000'));
 
 app.post('/gpt', async (req, res) => {
+    let tone = req.body.tone;
     let prompt = req.body.prompt;
     let language = req.body.language;
-    let response = await fetchTextCompletion(prompt, language);
+    let response = await fetchTextCompletion(tone, prompt, language);
     res.send(response);
 })
 
@@ -28,10 +29,10 @@ export async function fetchTextCompletion(tone, prompt, language) {
     const completion = await openai.chat.completions.create({
         model: 'gpt-4o-mini',
         messages: [
-            { role: 'system', content: `You are a fun translator. Provide a ${tone} translation in a phrase. Use example between ### to set the style of response.` },
+            { role: 'system', content: `You are a helpful translator. Provide the translation in a phrase. Use example between ### to set the style of response.` },
             {
                 role: 'user',
-                content: `Translate ${prompt} to ${language}.
+                content: `Translate ${prompt} to ${tone} ${language}.
                 ###
                 You can say:
                 ###
