@@ -1,4 +1,4 @@
-const availableLanguages = ['French', 'Spanish', 'Japanese', 'German', 'Italian', 'Chinese', 'Klingon', 'Quenya', 'Esperanto'];
+const availableLanguages = ['French', 'Spanish', 'Japanese', 'German', 'Italian', 'Chinese', 'Tagalog', 'Klingon', 'Esperanto'];
 const translateText = 'Translate';
 const startOverText = 'Start Over';
 
