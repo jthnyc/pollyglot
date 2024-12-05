@@ -47,10 +47,7 @@ export async function fetchTextCompletion(tone, prompt, language) {
     // );
 
     const bufferArray = Array.from(Buffer.from(completion.choices[0].message.audio.data, 'base64'));
-    // const audioBlob = new Blob(bufferArray, { 'type': 'audio/mp3;' });
-    // const audioURL = URL.createObjectURL(audioBlob);
-    // console.log('bufferArray: ', bufferArray);
-    // console.log('audioURL: ', audioURL);
     completion.choices[0].message.bufferArray = bufferArray
+    completion.choices[0].message.raw = completion.choices[0].message.audio.data
     return completion.choices[0].message;
 }
