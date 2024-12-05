@@ -38,16 +38,7 @@ export async function fetchTextCompletion(tone, prompt, language) {
             },
         ],
     });
-    // console.log('completion: ', completion.choices[0].message.audio.data)
 
-    // writeFileSync(
-    //     "translation.mp3",
-    //     Buffer.from(completion.choices[0].message.audio.data, 'base64'),
-    //     { encoding: "utf-8" }
-    // );
-
-    const bufferArray = Array.from(Buffer.from(completion.choices[0].message.audio.data, 'base64'));
-    completion.choices[0].message.bufferArray = bufferArray
-    completion.choices[0].message.raw = completion.choices[0].message.audio.data
+    completion.choices[0].message.rawAudioData = completion.choices[0].message.audio.data
     return completion.choices[0].message;
 }
