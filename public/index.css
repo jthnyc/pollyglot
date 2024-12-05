@@ -112,6 +112,10 @@ button:focus {
     }
 }
 
+.translation {
+    position: relative;
+}
+
 .language-select {
     @media screen and (min-width: 769px) {
         align-items: center;
@@ -125,12 +129,16 @@ button:focus {
 .translation__title {
     color: var(--medium-electric-blue);
     font-size: 1.25rem;
-    margin: .75rem 0;
+    margin: 1.05rem 0;
     text-align: center;
+
+    @media screen and (min-width: 601px) {
+        margin: .25rem 0;
+    }
 
     @media screen and (min-width: 769px) {
         align-items: center;
-        margin: 1.25rem 0;
+        margin: 1rem 0;
     }
 }
 
@@ -224,12 +232,20 @@ button:focus {
 .language-select__image {
     border: 1px solid var(--primary-black);
     height: 1.25rem;
+    width: 8%;
+
+    @media screen and (min-width: 769px) {
+        column-gap: .95rem;
+        width: 15%;
+    }
 }
 
 .translation__audio {
+    bottom: 10px;
     margin: .25rem 1rem;
-    width: 95%;
-    background: #fff;
+    position: absolute;
+    /* width: 95%;
+    background: #fff; */
 }
 
 /* BUTTON */
