@@ -19,7 +19,7 @@
 
 *::-webkit-scrollbar-thumb {
     border-radius: 1.25rem;
-    border: 3px solid var(--medium-electric-blue);
+    border: 0.1875rem solid var(--medium-electric-blue);
     background-color: var(--lime-green);
     background-clip: content-box;
 }
@@ -112,6 +112,10 @@ button:focus {
     }
 }
 
+.translation {
+    position: relative;
+}
+
 .language-select {
     @media screen and (min-width: 769px) {
         align-items: center;
@@ -141,7 +145,7 @@ button:focus {
 .translation-input__textarea,
 .translation__textarea {
     background-color: var(--anti-flash-white);
-    border: 1px solid var(--anti-flash-white);
+    border: 0.0625rem solid var(--anti-flash-white);
     border-radius: 0.5rem;
     font-size: 1.25rem;
     font-weight: 600;
@@ -172,7 +176,7 @@ button:focus {
     display: flex;
     flex-direction: column;
     column-gap: 1rem;
-    height: 120px;
+    height: 7.5rem;
     margin-top: 0.625rem;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -226,7 +230,7 @@ button:focus {
 }
 
 .language-select__image {
-    border: 1px solid var(--primary-black);
+    border: 0.0625rem solid var(--primary-black);
     height: 1.25rem;
     width: 8%;
 
@@ -234,6 +238,11 @@ button:focus {
         column-gap: .95rem;
         width: 15%;
     }
+}
+
+.translation__audio {
+    bottom: 0.75rem;
+    position: absolute;
 }
 
 /* BUTTON */

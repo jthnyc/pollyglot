@@ -26,21 +26,16 @@ const openai = new OpenAI({
 });
 
 export async function fetchTextCompletion(tone, prompt, language) {
-    const completion = await openai.chat.completions.create({
-        model: 'gpt-4o-mini',
+    let completion = await openai.chat.completions.create({
+        model: "gpt-4o-audio-preview",
+        modalities: ["text", "audio"],
+        audio: { voice: "alloy", format: "mp3" },
         messages: [
-            { role: 'system', content: `You are a helpful translator. Provide the translation in a phrase. Use example between ### to set the style of response.` },
             {
                 role: 'user',
-                content: `Translate ${prompt} to ${tone} ${language}.
-                ###
-                You can say:
-                ###
-                `,
+                content: `Translate ${prompt} to ${tone} ${language} without repeating the phrase in English.`,
             },
         ],
-        max_completion_tokens: 40
     });
-
     return completion.choices[0].message;
 }
