@@ -4,7 +4,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
-// import { writeFileSync, readFileSync } from "node:fs";
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -38,7 +37,5 @@ export async function fetchTextCompletion(tone, prompt, language) {
             },
         ],
     });
-
-    completion.choices[0].message.rawAudioData = completion.choices[0].message.audio.data
     return completion.choices[0].message;
 }

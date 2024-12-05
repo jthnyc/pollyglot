@@ -13,7 +13,6 @@ const translateCTA = document.querySelector('.translate-cta');
 let selectedTone = 'formal'
 let selectedLanguage = availableLanguages[0];
 let textToTranslate = '';
-let audioURL = '';
 
 function setEventListeners() {
     textInputArea.addEventListener('input', () => {
@@ -128,7 +127,7 @@ function handleCTA() {
         const translationJSON = fetchTranslation();
         translationJSON && translationJSON.then(translation => {
             renderTranslation(translation.audio.transcript);
-            const binaryArray = convertToBinary(translation.rawAudioData);
+            const binaryArray = convertToBinary(translation.audio.data);
             handleAudio(binaryArray);
         })
     }
