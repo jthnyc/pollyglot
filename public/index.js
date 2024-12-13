@@ -125,8 +125,22 @@ function handleCTA() {
     toggleUIDisplay();
     if (textToTranslate.length && !translationSection.classList.contains('hidden')) {
         const translationJSON = fetchTranslation();
-        translationJSON && translationJSON.then(translation => renderTranslation(translation.content))
+        translationJSON && translationJSON.then(translation => {
+            renderTranslation(translation.audio.transcript);
+            const binaryArray = convertToBinary(translation.audio.data);
+            handleAudio(binaryArray);
+        })
     }
+}
+
+function convertToBinary(rawAudioData) {
+    let raw = window.atob(rawAudioData);
+    let rawLength = raw.length;
+    let array = new Uint8Array(new ArrayBuffer(rawLength));
+    for (let i = 0; i < rawLength; i++) {
+        array[i] = raw.charCodeAt(i);
+    }
+    return array;
 }
 
 async function fetchTranslation() {
@@ -154,6 +168,13 @@ async function fetchTranslation() {
 
 function renderTranslation(translation) {
     translationTextArea.value = translation;
+}
+
+function handleAudio(binaryArray) {
+    const audioPlayer = document.querySelector('.translation__audio');
+    const audioBlob = new Blob([binaryArray], { 'type': 'audio/mpeg;' });
+    const audioURL = window.URL.createObjectURL(audioBlob);
+    audioPlayer.src = audioURL;
 }
 
 setEventListeners();
