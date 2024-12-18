@@ -1,3 +1,11 @@
+// import { createRoot } from "react-dom/client";
+
+// document.body.innerHTML = '<div id="app"></div>';
+
+// const root = createRoot(document.getElementById('app'));
+// root.render(<h1>HELLO WORLD</h1>);
+import './index.css';
+
 const availableLanguages = ['French', 'Spanish', 'Japanese', 'German', 'Italian', 'Chinese', 'Tagalog', 'Klingon', 'Esperanto'];
 const translateText = 'Translate';
 const startOverText = 'Start Over';

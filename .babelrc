@@ -1,5 +1,7 @@
 {
-    "presets": [["airbnb", {
-        "modules": "auto"
-    }]]
+    "presets": [
+        ["airbnb", { "modules": "auto"}],
+        ["@babel/preset-env"],
+        ["@babel/preset-react", { "runtime": "automatic" }]
+    ]
 }

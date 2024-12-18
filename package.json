@@ -1,19 +1,37 @@
 {
   "scripts": {
-    "start": "node completions.mjs"
+    "start": "node completions.mjs",
+    "dev": "concurrently \"npm run watch\" \"nodemon completions.mjs\"",
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "dependencies": {
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "openai": "^4.68.3"
+    "openai": "^4.68.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
+    "babel-loader": "^9.2.1",
+    "babel-preset-airbnb": "^5.0.0",
+    "concurrently": "^9.1.0",
+    "css-loader": "^7.1.2",
     "eslint": "^8.57.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^4.6.2"
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "html-webpack-plugin": "^5.6.3",
+    "node-polyfill-webpack-plugin": "^4.1.0",
+    "nodemon": "^3.1.9",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4"
   }
 }
