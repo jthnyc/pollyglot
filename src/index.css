@@ -55,7 +55,7 @@ button:focus {
 /* HERO */
 .hero {
     align-items: center;
-    background-image: url("assets/World_Map_1.png");
+    background-image: url("./assets/World_Map_1.png");
     background-position-x: right;
     background-repeat: no-repeat;
     display: flex;
