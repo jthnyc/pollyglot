@@ -1,104 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>PollyGlot</title>
         <link rel="stylesheet" href="index.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Poppins:ital,wght@0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     </head>
     <body>
-        <!-- <script src="index.jsx" type="module"></script> -->
         <script src="dist/bundle.js"></script>
-        <div class="main">
-            <div class="hero">
-                <img class="hero__image" src="../src/assets/parrot.png"/>
-                <div class="hero-text">
-                    <h1 class="hero-text__title">PollyGlot</h1>
-                    <span class="hero-text__subtext">Perfect Translation Every Time</span>
-                </div>
-            </div>
-            <div class="content">
-                <div class="translator">
-                    <div class="translation-input">
-                        <h3 class="translation-input__title">How do you say...</h3>
-                        <h3 class="translation-input__title-secondary hidden">Original text</h3>
-                        <h3 class="translation-input__title hidden error">Please enter text below</h3>
-                        <textarea class="translation-input__textarea"></textarea>
-                    </div>
-                    <div class="tone-select">
-                        <h3 class="tone-select__title">Tone</h3>
-                        <div class="tone-select__options">
-                            <div class="tone-select__option">
-                                <input type="radio" id="formal" name="tone" value="formal" checked />
-                                <label class="tone-select__label" for="formal">Formal</label>
-                            </div>
-                            <div class="tone-select__option">
-                                <input type="radio" id="colloquial" name="tone" value="colloquial" />
-                                <label class="tone-select__label" for="colloquial">Colloquial</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="language-select">
-                        <h3 class="language-select__title">Select Language</h3>
-                        <div class="language-select__options">
-                            <div class="language-select__option">
-                                <input type="radio" id="fr" name="language" value="French" checked />
-                                <label class="language-select__label" for="fr">French</label>
-                                <img class="language-select__image" src="../src/assets/fr.png" alt="French flag" />
-                            </div>
-                            <div class="language-select__option">
-                                <input type="radio" id="sp" name="language" value="Spanish" />
-                                <label class="language-select__label" for="sp">Spanish</label>
-                                <img class="language-select__image" src="../src/assets/sp.png" alt="Spanish flag" />
-                            </div>
-                            <div class="language-select__option">
-                                <input type="radio" id="jp" name="language" value="Japanese" />
-                                <label class="language-select__label" for="jp">Japanese</label>
-                                <img class="language-select__image" src="../src/assets/jp.png" alt="Japanese flag" />
-                            </div>
-                            <div class="language-select__option">
-                                <input type="radio" id="de" name="language" value="German" />
-                                <label class="language-select__label" for="de">German</label>
-                                <img class="language-select__image" src="../src/assets/de.png" alt="German flag" />
-                            </div>
-                            <div class="language-select__option">
-                                <input type="radio" id="it" name="language" value="Italian" />
-                                <label class="language-select__label" for="it">Italian</label>
-                                <img class="language-select__image" src="../src/assets/it.png" alt="Italian flag" />
-                            </div>
-                            <div class="language-select__option">
-                                <input type="radio" id="ch" name="language" value="Chinese" />
-                                <label class="language-select__label" for="ch">Chinese 繁</label>
-                                <img class="language-select__image" src="../src/assets/tw.png" alt="Taiwan flag" />
-                            </div>
-                            <div class="language-select__option">
-                                <input type="radio" id="ta" name="language" value="Tagalog" />
-                                <label class="language-select__label" for="ta">Tagalog</label>
-                                <img class="language-select__image" src="../src/assets/tagalog.png" alt="Tagalog flag" />
-                            </div>
-                            <div class="language-select__option">
-                                <input type="radio" id="kl" name="language" value="Klingon" />
-                                <label class="language-select__label" for="kl">Klingon</label>
-                                <img class="language-select__image" src="../src/assets/klingon.png" alt="Klingon flag" />
-                            </div>
-                            <div class="language-select__option">
-                                <input type="radio" id="es" name="language" value="Esperanto" />
-                                <label class="language-select__label" for="es">Esperanto</label>
-                                <img class="language-select__image" src="../src/assets/esperanto.png" alt="Esperanto flag" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="translation hidden">
-                        <h3 class="translation__title"></h3>
-                        <textarea class="translation__textarea" readonly></textarea>
-                        <audio class="translation__audio" controls type="audio/mpeg"></audio>
-                    </div>
-                    <button class="translate-cta translate-cta--disabled">Translate</button>
-                </div>
-            </div>
-        </div>
+        <div id="root"></div>
     </body>
 </html>
