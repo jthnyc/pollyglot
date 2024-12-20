@@ -1,10 +1,9 @@
-// import { createRoot } from "react-dom/client";
-
-// document.body.innerHTML = '<div id="app"></div>';
-
-// const root = createRoot(document.getElementById('app'));
-// root.render(<h1>HELLO WORLD</h1>);
+import { createRoot } from "react-dom/client";
 import './index.css';
+import App from "./App";
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
 
 const availableLanguages = ['French', 'Spanish', 'Japanese', 'German', 'Italian', 'Chinese', 'Tagalog', 'Klingon', 'Esperanto'];
 const translateText = 'Translate';

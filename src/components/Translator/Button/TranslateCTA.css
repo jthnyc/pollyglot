@@ -1,0 +1,22 @@
+.translate-cta {
+    background-color: var(--medium-electric-blue);
+    border: 0.0625rem solid var(--medium-electric-blue);
+    border-radius: 0.5rem;
+    color: var(--primary-white);
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    margin: .75rem 1.25rem;
+    min-height: 3.125rem;
+    padding: .5rem 1.5rem;
+
+    @media screen and (min-width: 769px) {
+        align-items: center;
+        margin: 1.5rem 1.3125rem;
+    }
+}
+
+.translate-cta--disabled {
+    background-color: var(--light-gray);
+    border-color: var(--light-gray);
+}

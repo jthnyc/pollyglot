@@ -1,0 +1,134 @@
+.content {
+    background-color: var(--primary-white);
+    height: 75vh;
+    padding: 1.875rem 1rem;
+}
+
+.translator {
+    align-content: center;
+    border: 0.25rem solid var(--primary-black);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.translation-input,
+.tone-select,
+.language-select,
+.translation {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1.5rem;
+
+    @media screen and (min-width: 769px) {
+        padding: 0.25rem 1.5rem;
+    }
+}
+
+.translation {
+    position: relative;
+}
+
+.language-select {
+    @media screen and (min-width: 769px) {
+        align-items: center;
+    }
+}
+
+.translation-input__title,
+.translation-input__title-secondary,
+.tone-select__title,
+.language-select__title,
+.translation__title {
+    color: var(--medium-electric-blue);
+    font-size: 1.25rem;
+    margin: 1.05rem 0;
+    text-align: center;
+
+    @media screen and (min-width: 601px) {
+        margin: .25rem 0;
+    }
+
+    @media screen and (min-width: 769px) {
+        align-items: center;
+        margin: 1rem 0;
+    }
+}
+
+.tone-select__options {
+    column-gap: .75rem;
+    display: flex;
+    flex-direction: row;
+    font-size: 1.25rem;
+    justify-content: center;
+    
+    @media screen and (min-width: 769px) {
+        column-gap: 2rem;
+        font-size: 1.5rem;
+    }
+}
+
+.language-select__options {
+    display: flex;
+    flex-direction: column;
+    column-gap: 1rem;
+    height: 7.5rem;
+    margin-top: 0.625rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-left: 1.5rem;
+    row-gap: 1rem;
+
+    @media screen and (600px <= width) {
+        display: grid;
+        height: initial;
+        grid-template-columns: repeat(2, 45%);
+        grid-template-rows: auto;
+        justify-content: center;
+        margin-top: 0;
+        overflow: initial;
+        padding-left: 0;
+        row-gap: .65rem;
+    }
+
+    @media screen and (min-width: 769px) {
+        column-gap: 1.5rem;
+        grid-template-columns: repeat(3, 35%);
+        justify-content: center;
+        margin-top: 0.625rem;
+        row-gap: 1rem;
+    }
+}
+
+.tone-select__option,
+.language-select__option {
+    align-items: center;
+    column-gap: 1rem;
+    display: flex;
+
+    @media screen and (min-width: 769px) {
+        column-gap: 1rem;
+        cursor: pointer;
+    }
+}
+
+.tone-select__option {
+    column-gap: .25rem;
+
+    @media screen and (min-width: 769px) {
+        column-gap: .95rem;
+    }
+}
+
+.tone-select__label,
+.language-select__label { 
+    cursor: pointer;
+}
+
+.translation__audio {
+    bottom: 0.75rem;
+    position: absolute;
+}
+
+

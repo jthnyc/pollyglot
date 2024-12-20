@@ -7,17 +7,12 @@ import { fileURLToPath } from 'url';
 
 const app = express();
 
-// Set __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Parse JSON request bodies
 app.use(bodyParser.json());
-
-// Serve static files from the 'dist' folder (React bundle)
 app.use(express.static(path.join(__dirname, 'dist')));
 
-// Fallback to 'index.html' for client-side routing (important for React Router)
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
