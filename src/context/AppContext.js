@@ -17,8 +17,6 @@ export function AppProvider({ children }) {
 
     const [ state, setState ] = useState(initialState);
 
-    console.log('what is state: ', state);
-
     const refresh = () => {
         setState(initialState);
     }
