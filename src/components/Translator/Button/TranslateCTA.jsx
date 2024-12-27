@@ -1,8 +1,13 @@
 import './TranslateCTA.css';
 
-function TranslateCTA() {
+function TranslateCTA({ buttonText, callback, disabled }) {
     return (
-        <button className="translate-cta translate-cta--disabled">Translate</button>
+        <button
+          className={`translate-cta ${disabled ? 'translate-cta--disabled' : ''}`}
+          onClick={callback}
+          >
+            { buttonText }
+        </button>
     )
 }
 
