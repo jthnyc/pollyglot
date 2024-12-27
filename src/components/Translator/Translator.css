@@ -121,11 +121,6 @@
     }
 }
 
-.tone-select__label,
-.language-select__label { 
-    cursor: pointer;
-}
-
 .translation__audio {
     bottom: 0.75rem;
     position: absolute;
