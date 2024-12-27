@@ -11,7 +11,6 @@ export function AppProvider({ children }) {
         textToTranslate: "",
         inputSectionTitle: initialInputTitle,
         translationSectionTitle: initialTranslationTitle,
-        isTranslationHidden: true,
         ctaText: initialCTAText
     }
 

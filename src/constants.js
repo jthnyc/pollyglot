@@ -18,7 +18,6 @@ export const toneMap = {
   export const textConstants = {
     initialInputTitle: "How do you say...",
     translatedInputTitle: "Original Text",
-    errorInputTitle: "Please enter text below",
     initialTranslationTitle: "Polly says",
     toneOptionsHeader: "Tone",
     langOptionsHeader: "Select Language",
