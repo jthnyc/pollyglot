@@ -1,11 +1,8 @@
 import './OptionsList.css';
-import { useState } from 'react';
 import { PrimaryHeader, RadioInput } from '../index';
 
 
 function OptionsList({ type, headerText, optionsObj, initChoice, hasIcon, callback }) {
-    const isTone = type === 'tone';
-
     return (
         <div className="language-select">
             <PrimaryHeader headerText={headerText} />
