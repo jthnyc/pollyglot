@@ -29,7 +29,6 @@ export function useTranslation(selectedTone, selectedLang, textToTranslate, hasT
                     textToTranslate: textToTranslate,
                     inputSectionTitle: textConstants.translatedInputTitle,
                     translationSectionTitle: `${selectedLang} ${textConstants.initialTranslationTitle}`,
-                    isTranslationHidden: false,
                     ctaText: textConstants.refreshCTAText
                 }))
             } catch (error) {

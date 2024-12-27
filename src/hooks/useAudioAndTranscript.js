@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 export function useAudioAndTranscript(translationJSON) {
-  const [audioSrc, setAudioSrc] = useState(null);
-  const [translationTranscript, setTranslationTranscript ] = useState('')
+  const [ audioSrc, setAudioSrc ] = useState(null);
+  const [ translationTranscript, setTranslationTranscript ] = useState('')
 
   useEffect(() => {
     if (translationJSON && translationJSON.audio) {
@@ -12,7 +12,7 @@ export function useAudioAndTranscript(translationJSON) {
       setAudioSrc(URL.createObjectURL(audioBlob));
       setTranslationTranscript(transcript);
     }
-  }, [translationJSON]);
+  }, [ translationJSON ]);
 
-  return { audioSrc, translationTranscript };
+  return { audioSrc, setAudioSrc, translationTranscript, setTranslationTranscript };
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Translator.css';
 import { TextArea, OptionsList, PrimaryHeader, TranslateCTA } from './';
 import { toneMap, languageMap, textConstants } from '../../constants';
@@ -6,14 +6,23 @@ import { useTranslation, useAudioAndTranscript } from '../../hooks';
 import { useAppContext } from '../../context/AppContext';
 
 function Translator() {
-    const { state: { tone, language, textToTranslate, inputSectionTitle, translationSectionTitle, isTranslationHidden, ctaText } } = useAppContext();
+    const { state: { tone, language, textToTranslate, inputSectionTitle, translationSectionTitle, ctaText } } = useAppContext();
     const [ selectedTone, setSelectedTone ] = useState(tone);
     const [ selectedLang, setSelectedLang ] = useState(language);
     const [ inputTextToTranslate, setTextToTranslate ] = useState(textToTranslate);
+    const [ isTranslationHidden, setIsTranslationHidden ] = useState(true);
     const [ hasTranslated, setHasTranslated ] = useState(false);
 
     const { translationJSON, hasError } = useTranslation(selectedTone, selectedLang, inputTextToTranslate, hasTranslated);
     const { audioSrc, translationTranscript } = useAudioAndTranscript(translationJSON);
+
+    useEffect(() => {
+        if (hasTranslated) {
+            setIsTranslationHidden(false);
+        } else {
+            setIsTranslationHidden(true);
+        }
+    }, [ hasTranslated ])
 
     return (
         <div className="content">
