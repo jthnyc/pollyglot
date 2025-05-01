@@ -3,13 +3,18 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin'); 
 
 module.exports = {
-  entry: './src/index.jsx', // Adjust this to your entry file
+  entry: './src/index.tsx', // Adjust this to your entry file
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
   module: {
     rules: [
+      {
+        test: /\.(ts|tsx)$/, // Match .ts and .tsx files
+        exclude: /node_modules/,
+        use: 'ts-loader', // Use ts-loader to handle TypeScript files
+      },
       {
         test: /\.css$/, // Match CSS files
         use: ['style-loader', 'css-loader'], // Process and inject CSS
@@ -34,7 +39,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   mode: 'development',
   plugins: [

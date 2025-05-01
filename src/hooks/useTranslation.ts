@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { textConstants } from '../constants';
 import { useAppContext } from '../context/AppContext'; 
+import { ToneAbbreviation, FlagAbbreviation } from '../constants';
 
-export function useTranslation(selectedTone, selectedLang, textToTranslate, hasTranslated) {
+export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: FlagAbbreviation, textToTranslate: string, hasTranslated: boolean) {
     const [ translationJSON, setTranslationJSON ] = useState(null);
     const [ hasError, setHasError ] = useState(false);
     const [ hasCompletedRequest, setHasCompletedRequest ] = useState(false);

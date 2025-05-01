@@ -1,6 +1,12 @@
 import './TranslateCTA.css';
 
-function TranslateCTA({ buttonText, callback, disabled }) {
+interface TranslateCTAProps {
+    buttonText: string,
+    callback: any,
+    disabled: boolean
+}
+
+const TranslateCTA: React.FC<TranslateCTAProps> = ({ buttonText, callback, disabled }) => {
     return (
         <button
           className={`translate-cta ${disabled ? 'translate-cta--disabled' : ''}`}
