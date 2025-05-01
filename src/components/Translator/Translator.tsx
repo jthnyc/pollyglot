@@ -11,10 +11,11 @@ function Translator() {
     const [ selectedLang, setSelectedLang ] = useState(state.language);
     const [ inputTextToTranslate, setTextToTranslate ] = useState(state.textToTranslate);
     const [ isTranslationHidden, setIsTranslationHidden ] = useState(true);
-    const [ hasTranslated, setHasTranslated ] = useState(false);
+    const [ shouldTranslate, setShouldTranslate ] = useState(false);
+    const loadingText = `${selectedLang} Polly`
 
-    const { translationJSON } = useTranslation(selectedTone, selectedLang, inputTextToTranslate, hasTranslated);
-    const { audioSrc, translationTranscript } = useAudioAndTranscript(translationJSON);
+    const { translationJSON, isLoading } = useTranslation(selectedTone, selectedLang, inputTextToTranslate, shouldTranslate);
+    const { audioSrc, setAudioSrc, translationTranscript, setTranslationTranscript } = useAudioAndTranscript(translationJSON);
 
     // state object is what changes, therefore syncing local state with context by tracking full object instead of inner properties
     useEffect(() => {
@@ -23,12 +24,8 @@ function Translator() {
     }, [ state.tone, state.language])
     
     useEffect(() => {
-        if (hasTranslated) {
-            setIsTranslationHidden(false);
-        } else {
-            setIsTranslationHidden(true);
-        }
-    }, [ hasTranslated ])
+        setIsTranslationHidden(!shouldTranslate);
+    }, [ shouldTranslate ])
 
     return (
         <div className="content">
@@ -48,7 +45,11 @@ function Translator() {
                 </div>
                 <TranslateCTA
                     buttonText={state.ctaText}
-                    callback={() => setHasTranslated(!hasTranslated)}
+                    callback={() => {
+                        setAudioSrc('');
+                        setTranslationTranscript('');
+                        setShouldTranslate(!shouldTranslate);
+                    }}
                     disabled={inputTextToTranslate === ''} />
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { textConstants } from '../constants';
+import { languageMap, textConstants } from '../constants';
 import { useAppContext } from '../context/AppContext'; 
 import { ToneAbbreviation, FlagAbbreviation } from '../constants';
 
@@ -7,10 +7,12 @@ export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: Fla
     const [ translationJSON, setTranslationJSON ] = useState(null);
     const [ hasError, setHasError ] = useState(false);
     const [ hasCompletedRequest, setHasCompletedRequest ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(false);
     const { setState, refresh } = useAppContext();
    
     useEffect(() => {
         const fetchTranslation = async () => {
+            setIsLoading(true);
             try {
                 const response = await fetch("/gpt", {
                     method: "POST",
@@ -29,12 +31,14 @@ export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: Fla
                     language: selectedLang,
                     textToTranslate: textToTranslate,
                     inputSectionTitle: textConstants.translatedInputTitle,
-                    translationSectionTitle: `${selectedLang} ${textConstants.initialTranslationTitle}`,
+                    translationSectionTitle: `${languageMap[selectedLang]} ${textConstants.completedTranslationTitle}`,
                     ctaText: textConstants.refreshCTAText
                 }))
             } catch (error) {
                 console.error(error);
                 setHasError(true);
+            } finally {
+                setIsLoading(false);
             }
         };
 
@@ -48,5 +52,5 @@ export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: Fla
         }
     }, [ hasTranslated ])
 
-    return { translationJSON, hasError}
+    return { translationJSON, hasError, isLoading }
 }

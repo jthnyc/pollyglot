@@ -11,7 +11,7 @@ export const languageMap: Record<FlagAbbreviation, string> = {
   jp: "Japanese",
   de: "German",
   it: "Italian",
-  tw: "Chinese",
+  tw: "Mandarin",
   ta: "Tagalog",
   kl: "Klingon",
   es: "Esperanto",
@@ -22,7 +22,8 @@ export type Abbreviation = ToneAbbreviation | FlagAbbreviation;
 export const textConstants = {
   initialInputTitle: "How do you say...",
   translatedInputTitle: "Original Text",
-  initialTranslationTitle: "Polly says",
+  initialTranslationTitle: "Polly is thinking...",
+  completedTranslationTitle: "Polly says",
   toneOptionsHeader: "Tone",
   langOptionsHeader: "Select Language",
   initialTone: "formal" as ToneAbbreviation,
