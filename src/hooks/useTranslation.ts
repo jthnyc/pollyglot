@@ -3,28 +3,31 @@ import { languageMap, textConstants } from '../constants';
 import { useAppContext } from '../context/AppContext'; 
 import { ToneAbbreviation, FlagAbbreviation } from '../constants';
 
-export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: FlagAbbreviation, textToTranslate: string, hasTranslated: boolean) {
+export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: FlagAbbreviation, textToTranslate: string, shouldTranslate: boolean) {
     const [ translationJSON, setTranslationJSON ] = useState(null);
     const [ hasError, setHasError ] = useState(false);
-    const [ hasCompletedRequest, setHasCompletedRequest ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
-    const { setState, refresh } = useAppContext();
+    const { setState } = useAppContext();
    
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal;
+
         const fetchTranslation = async () => {
             setIsLoading(true);
+            setTranslationJSON(null);
             try {
                 const response = await fetch("/gpt", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ tone: selectedTone, prompt: textToTranslate, language: selectedLang }),
+                    body: JSON.stringify({ tone: selectedTone, prompt: textToTranslate, language: languageMap[selectedLang] }),
+                    signal
                 });
                 if (!response.ok) {
                     throw new Error("Translation fetch failed");
                 }
                 const data = await response.json();
                 setTranslationJSON(data);
-                setHasCompletedRequest(true);
                 setState((prevState) => ({
                     ...prevState,
                     tone: selectedTone,
@@ -34,23 +37,25 @@ export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: Fla
                     translationSectionTitle: `${languageMap[selectedLang]} ${textConstants.completedTranslationTitle}`,
                     ctaText: textConstants.refreshCTAText
                 }))
-            } catch (error) {
-                console.error(error);
-                setHasError(true);
+            } catch (error: any) {
+                if (error.name === "AbortError") {
+                    console.log("Translation request was cancelled.")
+                } else {
+                    console.error(error);
+                    setHasError(true);
+                }
             } finally {
                 setIsLoading(false);
             }
         };
 
-        if (hasTranslated && textToTranslate) {
+        if (shouldTranslate && textToTranslate) {
             setHasError(false);
             fetchTranslation();
-        } else if (!hasTranslated && hasCompletedRequest) {
-            setHasCompletedRequest(false);
-            setHasError(false);
-            refresh();
         }
-    }, [ hasTranslated ])
+
+        return () => controller.abort();
+    }, [ shouldTranslate ])
 
     return { translationJSON, hasError, isLoading }
 }

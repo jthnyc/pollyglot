@@ -1,7 +1,8 @@
-export type ToneAbbreviation = 'formal' | 'colloquial';
+export type ToneAbbreviation = 'formal' | 'friendly' | 'slang';
 export const toneMap: Record<ToneAbbreviation, string> = {
     formal: "Formal",
-    colloquial: "Colloquial",
+    friendly: "Friendly",
+    slang: "Slang"
   };
 
 export type FlagAbbreviation = 'de' | 'es' | 'fr' | 'it' | 'jp' | 'kl' | 'sp' | 'ta' | 'tw';

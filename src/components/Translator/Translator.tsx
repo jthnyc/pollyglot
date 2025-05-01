@@ -6,13 +6,12 @@ import { useTranslation, useAudioAndTranscript } from '../../hooks';
 import { useAppContext } from '../../context/AppContext';
 
 function Translator() {
-    const { state } = useAppContext();
+    const { state, refresh } = useAppContext();
     const [ selectedTone, setSelectedTone ] = useState(state.tone);
     const [ selectedLang, setSelectedLang ] = useState(state.language);
     const [ inputTextToTranslate, setTextToTranslate ] = useState(state.textToTranslate);
     const [ isTranslationHidden, setIsTranslationHidden ] = useState(true);
     const [ shouldTranslate, setShouldTranslate ] = useState(false);
-    const loadingText = `${selectedLang} Polly`
 
     const { translationJSON, isLoading } = useTranslation(selectedTone, selectedLang, inputTextToTranslate, shouldTranslate);
     const { audioSrc, setAudioSrc, translationTranscript, setTranslationTranscript } = useAudioAndTranscript(translationJSON);
@@ -49,6 +48,7 @@ function Translator() {
                         setAudioSrc('');
                         setTranslationTranscript('');
                         setShouldTranslate(!shouldTranslate);
+                        refresh();
                     }}
                     disabled={inputTextToTranslate === ''} />
             </div>
