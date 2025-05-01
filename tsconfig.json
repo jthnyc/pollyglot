@@ -1,0 +1,25 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "PollyGlot",
+    "_version": "2.0.0",
+  
+    "compilerOptions": {
+      "lib": ["dom", "dom.iterable", "esnext"],
+      "module": "esnext",
+      "moduleResolution": "bundler",
+      "target": "es5",
+      "allowJs": true,
+      "checkJs": false,
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "isolatedModules": true,
+      "jsx": "react-jsx",
+      "noEmit": false,
+      "noFallthroughCasesInSwitch": true,
+      "resolveJsonModule": true,
+      "skipLibCheck": true,
+      "strict": true
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
+  }

@@ -10,7 +10,9 @@ import taFlag from './tagalog.png';
 import twFlag from './tw.png';
 import worldMapImage from './World_Map_1.png';
 
-const flagImageMap = {
+type FlagAbbreviation = 'de' | 'es' | 'fr' | 'it' | 'jp' | 'kl' | 'sp' | 'ta' | 'tw';
+
+const flagImageMap: Record<FlagAbbreviation, string> = {
     de: deFlag,
     es: esFlag,
     fr: frFlag,

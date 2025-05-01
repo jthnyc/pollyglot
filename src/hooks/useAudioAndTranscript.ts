@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-export function useAudioAndTranscript(translationJSON) {
-  const [ audioSrc, setAudioSrc ] = useState(null);
+export function useAudioAndTranscript(translationJSON: any) {
+  const [ audioSrc, setAudioSrc ] = useState('');
   const [ translationTranscript, setTranslationTranscript ] = useState('')
 
   useEffect(() => {
