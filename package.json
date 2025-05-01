@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node completions.mjs",
+    "start": "npm run build && node completions.mjs",
     "dev": "concurrently \"npm run watch\" \"nodemon completions.mjs\"",
     "build": "webpack",
     "watch": "webpack --watch"
