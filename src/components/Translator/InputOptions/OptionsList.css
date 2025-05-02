@@ -20,8 +20,8 @@
 
     @media screen and (min-width: 769px) {
         overflow-y: unset;
-        width: 90%;
-        max-width: 850px;
+        width: 100%;
+        max-width: 50rem;
     }
 }
 
@@ -97,6 +97,7 @@
         justify-content: center;
         margin-top: 0.625rem;
         overflow-x: unset;
+        padding-left: 0;
         row-gap: 1rem;
     }
 }

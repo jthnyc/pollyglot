@@ -13,6 +13,7 @@
     
     @media screen and (min-width: 769px) {
         padding: 2rem 2rem;
+        overflow: visible;
     }
 }
 
