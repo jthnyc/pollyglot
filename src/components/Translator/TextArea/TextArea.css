@@ -1,16 +1,22 @@
-.translation-input__textarea,
-.translation__textarea {
+.translation-input__textarea {
     background-color: var(--anti-flash-white);
     border: 0.0625rem solid var(--anti-flash-white);
     border-radius: 0.5rem;
-    font-size: 1.25rem;
-    font-weight: 600;
+    box-sizing: border-box;
+    font-size: 1rem;
     line-height: 1.5;
-    min-height: 15vh;
-    padding: 0.75rem 0.625rem;
+    max-height: 30vh;
+    min-height: 12rem;
+    padding: 0.75rem;
     resize: none;
+    width: 100%;
+
+    @media screen and (max-width: 380px) {
+        font-size: 0.9rem;
+        min-height: 8rem;
+    }
 
     @media screen and (min-width: 769px) {
-        max-height: 20vh;
+        font-size: 1.25rem;
     }
 }

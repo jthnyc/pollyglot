@@ -1,15 +1,19 @@
-.language-select__title {
+.translation-input__title,
+.translation-input__title-secondary,
+.tone-select__title,
+.language-select__title,
+.translation__title {
     color: var(--medium-electric-blue);
     font-size: 1.25rem;
-    margin: 1.05rem 0;
+    margin: .75rem 0;
     text-align: center;
 
-    @media screen and (min-width: 601px) {
-        margin: .25rem 0;
+    @media screen and (max-width: 380px) {
+        font-size: 1rem;
     }
 
     @media screen and (min-width: 769px) {
         align-items: center;
-        margin: 1rem 0;
+        margin: 1.05rem 0;
     }
 }

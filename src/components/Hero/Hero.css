@@ -4,7 +4,8 @@
     background-position-x: right;
     background-repeat: no-repeat;
     display: flex;
-    height: 25vh;
+    flex-shrink: 0;
+    height: 18vh;
     justify-content: center;
 }
 

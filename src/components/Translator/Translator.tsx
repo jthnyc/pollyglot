@@ -10,10 +10,9 @@ function Translator() {
     const [ selectedTone, setSelectedTone ] = useState(state.tone);
     const [ selectedLang, setSelectedLang ] = useState(state.language);
     const [ inputTextToTranslate, setTextToTranslate ] = useState(state.textToTranslate);
-    const [ isTranslationHidden, setIsTranslationHidden ] = useState(true);
     const [ shouldTranslate, setShouldTranslate ] = useState(false);
 
-    const { translationJSON, isLoading } = useTranslation(selectedTone, selectedLang, inputTextToTranslate, shouldTranslate);
+    const { translationJSON } = useTranslation(selectedTone, selectedLang, inputTextToTranslate, shouldTranslate);
     const { audioSrc, setAudioSrc, translationTranscript, setTranslationTranscript } = useAudioAndTranscript(translationJSON);
 
     // state object is what changes, therefore syncing local state with context by tracking full object instead of inner properties
@@ -22,9 +21,6 @@ function Translator() {
         setSelectedLang(state.language);
     }, [ state.tone, state.language])
     
-    useEffect(() => {
-        setIsTranslationHidden(!shouldTranslate);
-    }, [ shouldTranslate ])
 
     return (
         <div className="content">
@@ -33,14 +29,20 @@ function Translator() {
                     <PrimaryHeader headerText={state.inputSectionTitle} />
                     <TextArea isReadOnly={false} textContent={inputTextToTranslate} callback={setTextToTranslate} />
                 </div>
-                <div className={`${isTranslationHidden ? '' : 'hidden'}`}>
-                    <OptionsList type="tone" headerText={textConstants.toneOptionsHeader} optionsObj={toneMap} initChoice={selectedTone} hasIcon={false} callback={setSelectedTone} />
-                    <OptionsList type="language" headerText={textConstants.langOptionsHeader} optionsObj={languageMap} initChoice={selectedLang} hasIcon={true} callback={setSelectedLang} />
-                </div>
-                <div className={`translation ${isTranslationHidden ? 'hidden' : ''}`}>
-                    <PrimaryHeader headerText={state.translationSectionTitle} />
-                    <TextArea isReadOnly={true} textContent={translationTranscript} callback={{}} />
-                    {audioSrc && <audio src={audioSrc} className="translation__audio" controls></audio>}
+                <div className="translator__scrollable">
+                    {!shouldTranslate ? (
+                            <div className="translation-options">
+                                <OptionsList type="tone" headerText={textConstants.toneOptionsHeader} optionsObj={toneMap} initChoice={selectedTone} hasIcon={false} callback={setSelectedTone} />
+                                    <OptionsList type="language" headerText={textConstants.langOptionsHeader} optionsObj={languageMap} initChoice={selectedLang} hasIcon={true} callback={setSelectedLang} />
+                            </div>
+                        ) : (
+                            <div className="translation">
+                                <PrimaryHeader headerText={state.translationSectionTitle} />
+                                <TextArea isReadOnly={true} textContent={translationTranscript} callback={{}} />
+                                {audioSrc && <audio src={audioSrc} className="translation__audio" controls></audio>}
+                            </div>
+                        )
+                    }
                 </div>
                 <TranslateCTA
                     buttonText={state.ctaText}

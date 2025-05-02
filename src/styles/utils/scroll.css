@@ -1,0 +1,16 @@
+.u-custom-scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+.u-custom-scroll::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0.75rem;
+}
+
+.u-custom-scroll::-webkit-scrollbar-thumb {
+    border-radius: 0.875rem;
+    border: 0.1875rem solid var(--medium-electric-blue);
+    background-color: var(--lime-green);
+    background-clip: content-box;
+}

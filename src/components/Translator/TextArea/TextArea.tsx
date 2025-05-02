@@ -9,12 +9,12 @@ interface TextAreaProps {
 const TextArea: React.FC<TextAreaProps> = ({ isReadOnly, textContent, callback }) => {
     return (
         <textarea 
-          className="translation-input__textarea"
+          className="translation-input__textarea u-custom-scroll"
           readOnly={isReadOnly}
           value={textContent}
           onChange={(e) => callback(e.target.value)}
           >
-          </textarea>
+        </textarea>
     )
 }
 
