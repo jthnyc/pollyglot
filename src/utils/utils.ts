@@ -1,6 +1,6 @@
-import { flagImageMap } from '../assets';
-import { FlagAbbreviation, Abbreviation } from '../constants';
+// import { flagImageMap } from '../assets';
+// import { Abbreviation } from '../constants';
 
-export function isFlagAbbreviation(abbr: Abbreviation): abbr is FlagAbbreviation {
-  return abbr in flagImageMap;
-}
+// export function isFlagAbbreviation(abbr: Abbreviation): abbr is FlagAbbreviation {
+//   return abbr in flagImageMap;
+// }

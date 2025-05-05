@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import { languageMap, textConstants } from '../constants';
+import { languageMap, textConstants, LanguageAbbreviation } from '../constants';
 import { useAppContext } from '../context/AppContext'; 
 import { TranslationContext } from '../context/TranslationContext';
-import { FlagAbbreviation } from '../constants';
 
-export function useTranslation(translationContext: TranslationContext, selectedLang: FlagAbbreviation, textToTranslate: string, shouldTranslate: boolean) {
+export function useTranslation(translationContext: TranslationContext, selectedDialect: string, textToTranslate: string, shouldTranslate: boolean) {
     const [ translationJSON, setTranslationJSON ] = useState(null);
     const [ hasError, setHasError ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
@@ -14,6 +13,16 @@ export function useTranslation(translationContext: TranslationContext, selectedL
         const controller = new AbortController();
         const signal = controller.signal;
 
+        console.log(`
+                prompt: ${textToTranslate}, 
+                language: ${translationContext.language},
+                context: {
+                    dialect: ${selectedDialect},
+                    tone: ${translationContext.tone},
+                    audience: ${translationContext.audience},
+                    goal: ${translationContext.goal}
+            `)
+
         const fetchTranslation = async () => {
             setIsLoading(true);
             setTranslationJSON(null);
@@ -21,12 +30,12 @@ export function useTranslation(translationContext: TranslationContext, selectedL
                 const response = await fetch("/gpt", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ 
-                        tone: translationContext.tone, 
+                    body: JSON.stringify({  
                         prompt: textToTranslate, 
-                        language: languageMap[selectedLang],
+                        language: translationContext.language,
                         context: {
-                            location: translationContext.location,
+                            dialect: selectedDialect,
+                            tone: translationContext.tone,
                             audience: translationContext.audience,
                             goal: translationContext.goal
                         }
@@ -41,10 +50,10 @@ export function useTranslation(translationContext: TranslationContext, selectedL
                 setState((prevState) => ({
                     ...prevState,
                     tone: translationContext.tone,
-                    language: selectedLang,
+                    language: translationContext.language,
                     textToTranslate: textToTranslate,
                     inputSectionTitle: textConstants.translatedInputTitle,
-                    translationSectionTitle: `${languageMap[selectedLang]} ${textConstants.completedTranslationTitle}`,
+                    translationSectionTitle: `${translationContext.language} ${textConstants.completedTranslationTitle}`,
                     ctaText: textConstants.refreshCTAText
                 }))
             } catch (error: any) {

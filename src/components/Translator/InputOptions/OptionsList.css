@@ -78,7 +78,7 @@
     flex-grow: 1;
     min-height: 0;
 
-    @media screen and (min-width: 450px) and (max-width: 768px)  {
+    /* @media screen and (min-width: 450px) and (max-width: 768px)  {
         display: grid;
         height: initial;
         grid-template-columns: repeat(2, 45%);
@@ -99,7 +99,7 @@
         overflow-x: unset;
         padding-left: 0;
         row-gap: 1rem;
-    }
+    } */
 }
 
 .tone-select__options {

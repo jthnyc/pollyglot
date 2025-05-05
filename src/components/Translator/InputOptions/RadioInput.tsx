@@ -1,22 +1,22 @@
 import './RadioInput.css';
-import { flagImageMap } from "../../../assets";
-import { Abbreviation } from '../../../constants';
-import { isFlagAbbreviation } from '../../../utils/utils';
+// import { flagImageMap } from "../../../assets";
+// import { Abbreviation } from '../../../constants';
+// import { isFlagAbbreviation } from '../../../utils/utils';
 
-interface RadioInputProps<K extends string> {
-    currSelect: K;
-    cb: (value: K) => void;
+interface RadioInputProps {
+    currSelect: string;
+    cb: (value: string) => void;
     type: string;
-    abbr: K;
+    abbr: string;
     name: string;
-    hasIcon: boolean;
+    hasIcon?: boolean;
 }  
 
-const RadioInput = <K extends string>({currSelect, cb, type, abbr, name, hasIcon}: RadioInputProps<K>) => {
-    const flagImgSrc = isFlagAbbreviation(abbr as Abbreviation)
-            ? flagImageMap[abbr as keyof typeof flagImageMap]
-            : '';
-
+const RadioInput = ({currSelect, cb, type, abbr, name, hasIcon}: RadioInputProps) => {
+    // const flagImgSrc = isFlagAbbreviation(abbr as Abbreviation)
+    //         ? flagImageMap[abbr as keyof typeof flagImageMap]
+    //         : '';
+ 
     return (
         <label className={`${type}-select__label`} htmlFor={abbr}>
             <input
@@ -25,9 +25,9 @@ const RadioInput = <K extends string>({currSelect, cb, type, abbr, name, hasIcon
               name={type}
               value={abbr}
               checked={abbr === currSelect}
-              onChange={() => cb(abbr)} />
+              onChange={() => cb(name)} />
             { name }
-            { hasIcon && <img className={`${type}-select__image`} src={flagImgSrc} alt={`${name} flag`} /> }
+            {/* { hasIcon && <img className={`${type}-select__image`} src={flagImgSrc} alt={`${name} flag`} /> } */}
         </label>
     )
 }

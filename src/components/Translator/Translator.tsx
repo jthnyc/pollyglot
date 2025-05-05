@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Translator.css';
 import { TextArea, ContextForm, OptionsList, PrimaryHeader, TranslateCTA } from '.';
-import { languageMap, locationToLanguageMap, textConstants } from '../../constants';
+import { languageMap, textConstants, languageToAbbr } from '../../constants';
 import { useTranslation, useAudioAndTranscript } from '../../hooks';
 import { useAppContext } from '../../context/AppContext';
 import { TranslationContext, defaultContext} from '../../context/TranslationContext';
@@ -9,25 +9,26 @@ import { TranslationContext, defaultContext} from '../../context/TranslationCont
 function Translator() {
     const { state, setState, refresh } = useAppContext();
     const [ selectedContext, setSelectedContext ] = useState<TranslationContext>(defaultContext);
-    const [ selectedLang, setSelectedLang ] = useState(state.language);
+    const [ dialectList, setDialectList ] = useState<string[]>([]);
+    const [ selectedDialect, setSelectedDialect ] = useState('');
     const [ inputTextToTranslate, setTextToTranslate ] = useState(state.textToTranslate);
     const [ shouldTranslate, setShouldTranslate ] = useState(false);
-    const { translationJSON } = useTranslation(selectedContext, selectedLang, inputTextToTranslate, shouldTranslate);
+    const { translationJSON } = useTranslation(selectedContext, selectedDialect, inputTextToTranslate, shouldTranslate);
     const { audioSrc, setAudioSrc, translationTranscript, setTranslationTranscript } = useAudioAndTranscript(translationJSON);
 
     const handleContextChange = (updated: TranslationContext) => {
         setSelectedContext(updated);
-        if (updated.location && locationToLanguageMap[updated.location]) {
-            const newLang = locationToLanguageMap[updated.location];
-            setSelectedLang(newLang);
-            setState(prev => ({ ...prev, language: newLang }));
+        const langAbbr = languageToAbbr[updated.language];
+        if (updated.language && langAbbr) {
+            const dialects = languageMap[langAbbr].dialects;
+            setDialectList(dialects);
         }
     }
 
     // state object is what changes, therefore syncing local state with context by tracking full object instead of inner properties
-    useEffect(() => {
-        setSelectedLang(state.language);
-    }, [ state.language])
+    // useEffect(() => {
+    //     setSelectedLang(state.language);
+    // }, [ state.language ])
 
     return (
         <div className="content">
@@ -40,7 +41,13 @@ function Translator() {
                     {!shouldTranslate ? (
                             <div className="translation-options">
                                 <ContextForm context={selectedContext} onChange={handleContextChange} />
-                                <OptionsList type="language" headerText={textConstants.langOptionsHeader} optionsObj={languageMap} initChoice={selectedLang} hasIcon={true} callback={setSelectedLang} />
+                                <OptionsList
+                                    type="language"
+                                    headerText={textConstants.langOptionsHeader}
+                                    options={dialectList}
+                                    selectedDialect={selectedDialect}
+                                    hasIcon={false}
+                                    callback={setSelectedDialect} />
                             </div>
                         ) : (
                             <div className="translation">

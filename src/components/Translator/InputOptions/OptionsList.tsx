@@ -2,33 +2,34 @@ import './OptionsList.css';
 import { PrimaryHeader, RadioInput } from '../index';
 
 type OptionsListProps<K extends string> = {
-    type: 'tone' | 'language' | 'context';
+    type: string;
     headerText: string;
-    optionsObj: Record<K, string>;
-    initChoice: K;
+    options: string[];
+    selectedDialect: K;
     hasIcon: boolean;
-    callback: (value: K) => void;
+    callback: (value: string) => void;
 }
 
-const OptionsList = <K extends string>({ type, headerText, optionsObj, initChoice, hasIcon, callback }: OptionsListProps<K>) => {
+const OptionsList = <K extends string>({ type, headerText, options, selectedDialect, hasIcon, callback }: OptionsListProps<K>) => {
+    console.log("currSelect: ", selectedDialect)
     return (
         <div className={`${type}-select`}>
             <PrimaryHeader headerText={headerText} />
             <div className={`${type}-select__options-wrapper`}>
                 <div className={`${type}-select__options `}>
-                    { (Object.keys(optionsObj) as K[]).map((abbreviation) => {
-                        const fullText = optionsObj[abbreviation];
+                    { options.map((option) => {
+                        
                         return (
-                        <RadioInput
-                            key={abbreviation}
-                            currSelect={initChoice}
-                            cb={callback}
-                            type={type}
-                            abbr={abbreviation}
-                            name={fullText}
-                            hasIcon={hasIcon}
-                        />
-                        );
+                            <RadioInput 
+                                key={option}
+                                currSelect={selectedDialect}
+                                cb={callback}
+                                type={type}
+                                abbr={option}
+                                name={option}
+                                hasIcon={hasIcon}
+                            />
+                        )
                     })}
                 </div>
             </div>

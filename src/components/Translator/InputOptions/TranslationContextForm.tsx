@@ -1,7 +1,7 @@
 import React from 'react';
 import './TranslationContextForm.css';
 import { PrimaryHeader } from '../index';
-import { TranslationContext, locationOptions, audienceOptions, goalOptions, toneOptions } from '../../../context/TranslationContext';
+import { TranslationContext, languageOptions, audienceOptions, goalOptions, toneOptions } from '../../../context/TranslationContext';
 
 const TranslationContextForm = ({ context, onChange }: {context: TranslationContext; onChange: (updated: TranslationContext) => void; }) => {
     const handleChange = (key: keyof TranslationContext, value: string) => {
@@ -13,11 +13,19 @@ const TranslationContextForm = ({ context, onChange }: {context: TranslationCont
             <PrimaryHeader headerText={"Add Context"} />
             <div className='context-select__options'>
                 <label>
-                    Location:
-                    <select value={context.location || ""} onChange={(e) => handleChange("location", e.target.value)}>
-                        <option value="">--</option>
-                        {locationOptions.map((loc) => (
+                    Language:
+                    <select value={context.language || ""} onChange={(e) => handleChange("language", e.target.value)}>
+                        {languageOptions.map((loc) => (
                             <option key={loc} value={loc}>{loc}</option>
+                        ))}
+                    </select>
+                </label>
+
+                <label>
+                    Tone:
+                    <select value={context.tone || ""} onChange={(e) => handleChange("tone", e.target.value)}>
+                        {toneOptions.map((tone) => (
+                            <option key={tone} value={tone}>{tone}</option>
                         ))}
                     </select>
                 </label>
@@ -38,16 +46,6 @@ const TranslationContextForm = ({ context, onChange }: {context: TranslationCont
                         <option value="">--</option>
                         {goalOptions.map((goal) => (
                             <option key={goal} value={goal}>{goal}</option>
-                        ))}
-                    </select>
-                </label>
-
-                <label>
-                    Tone:
-                    <select value={context.tone || ""} onChange={(e) => handleChange("goal", e.target.value)}>
-                        <option value="">--</option>
-                        {toneOptions.map((tone) => (
-                            <option key={tone} value={tone}>{tone}</option>
                         ))}
                     </select>
                 </label>

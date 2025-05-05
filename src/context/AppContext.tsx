@@ -1,9 +1,7 @@
 import { createContext, useState, useContext, PropsWithChildren } from "react";
 import { textConstants, languageMap } from "../constants";
 
-type Language = keyof typeof languageMap;
 type AppState = {
-    language: Language;
     textToTranslate: string;
     inputSectionTitle: string;
     translationSectionTitle: string;
@@ -19,9 +17,8 @@ type AppContextType = {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: PropsWithChildren<{}>) {
-    const { initialLang, initialInputTitle, initialTranslationTitle, initialCTAText } = textConstants;
+    const { initialInputTitle, initialTranslationTitle, initialCTAText } = textConstants;
     const initialState: AppState = {
-        language: initialLang as Language,
         textToTranslate: "",
         inputSectionTitle: initialInputTitle,
         translationSectionTitle: initialTranslationTitle,
@@ -31,10 +28,7 @@ export function AppProvider({ children }: PropsWithChildren<{}>) {
     const [ state, setState ] = useState(initialState);
 
     const refresh = () => {
-        setState(prev => ({
-            ...initialState,
-            language: prev.language
-        }))
+        setState(initialState)
     }
 
     return (

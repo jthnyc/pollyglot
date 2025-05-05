@@ -11,19 +11,19 @@ import taFlag from './tagalog.png';
 import twFlag from './tw.png';
 import worldMapImage from './World_Map_1.png';
 
-type FlagAbbreviation = 'de' | 'es' | 'fr' | 'it' | 'jp' | 'kl' | 'kr' | 'sp' | 'ta' | 'tw';
+type FlagAbbreviation = 'ch' | 'sp' | 'en' | 'fr' | 'ar' | 'ta' | 'jp' | 'de' | 'kr' | 'it' | 'kl' | 'es' | 'el';
 
-const flagImageMap: Record<FlagAbbreviation, string> = {
-    de: deFlag,
-    es: esFlag,
-    fr: frFlag,
-    it: itFlag,
-    jp: jpFlag,
-    kl: klFlag,
-    kr: krFlag,
-    sp: spFlag,
-    ta: taFlag,
-    tw: twFlag
-}
+// const flagImageMap: Record<FlagAbbreviation, string> = {
+//     de: deFlag,
+//     es: esFlag,
+//     fr: frFlag,
+//     it: itFlag,
+//     jp: jpFlag,
+//     kl: klFlag,
+//     kr: krFlag,
+//     sp: spFlag,
+//     ta: taFlag,
+//     tw: twFlag
+// }
 
-export { parrot, worldMapImage, flagImageMap }
+export { parrot, worldMapImage }

@@ -1,30 +1,30 @@
 import React from "react";
 
 export type TranslationContext = {
-  location: string;
-  audience: string;
+  language: string;
+  audience?: string;
   goal?: string;
   tone: string;
 };
 
 export const defaultContext: TranslationContext = {
-  location: "No Preference",
-  audience: "Stranger",
+  language: "Chinese",
   tone: "Friendly",
 };
 
-// Dropdown option lists
-export const locationOptions = [
-  "No Preference",
-  "Japan",
-  "France",
-  "Germany",
-  "Italy",
-  "Spain",
-  "Taiwan",
-  "Korea",
-  "Philippines",
-];
+export const languageOptions = [
+  "Chinese",
+  "Spanish",
+  "English",
+  "French",
+  "Arabic",
+  "Tagalog",
+  "Japanese",
+  "German",
+  "Korean",
+  "Italian",
+  "Constructed/Fictional"
+]
 
 export const audienceOptions = [
   "Stranger",
