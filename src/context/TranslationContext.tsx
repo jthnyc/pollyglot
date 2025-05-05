@@ -21,11 +21,9 @@ export const locationOptions = [
   "Germany",
   "Italy",
   "Spain",
-  "Mexico",
-  "Philippines",
   "Taiwan",
   "Korea",
-  "United States",
+  "Philippines",
 ];
 
 export const audienceOptions = [

@@ -5,11 +5,12 @@ export const toneMap: Record<ToneAbbreviation, string> = {
     slang: "Slang"
   };
 
-export type FlagAbbreviation = 'de' | 'es' | 'fr' | 'it' | 'jp' | 'kl' | 'sp' | 'ta' | 'tw';
+export type FlagAbbreviation = 'de' | 'es' | 'fr' | 'it' | 'jp' | 'kl' | 'kr' | 'sp' | 'ta' | 'tw';
 export const languageMap: Record<FlagAbbreviation, string> = {
   fr: "French",
   sp: "Spanish",
   jp: "Japanese",
+  kr: 'Korean',
   de: "German",
   it: "Italian",
   tw: "Mandarin",
@@ -32,4 +33,16 @@ export const textConstants = {
   initialCTAText: "Translate",
   refreshCTAText: "Start Over",
 };
-  
+
+export const locationToLanguageMap: Record<string, keyof typeof languageMap> = {
+  Japan: 'jp',
+  Canada: 'fr',
+  France: 'fr',
+  Switcherland: 'fr',
+  Germany: 'de',
+  Italy: 'it',
+  Spain: 'sp',
+  Philippines: 'ta',
+  Taiwan: 'tw',
+  Korea: 'kr'
+}

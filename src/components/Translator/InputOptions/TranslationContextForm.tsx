@@ -6,7 +6,6 @@ import { TranslationContext, locationOptions, audienceOptions, goalOptions, tone
 const TranslationContextForm = ({ context, onChange }: {context: TranslationContext; onChange: (updated: TranslationContext) => void; }) => {
     const handleChange = (key: keyof TranslationContext, value: string) => {
         onChange({ ...context, [key]: value });
-        console.log(context)
     };
 
     return (

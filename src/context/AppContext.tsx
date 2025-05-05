@@ -31,7 +31,10 @@ export function AppProvider({ children }: PropsWithChildren<{}>) {
     const [ state, setState ] = useState(initialState);
 
     const refresh = () => {
-        setState(initialState);
+        setState(prev => ({
+            ...initialState,
+            language: prev.language
+        }))
     }
 
     return (

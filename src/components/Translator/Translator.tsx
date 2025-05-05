@@ -1,20 +1,28 @@
 import { useEffect, useState } from 'react';
 import './Translator.css';
 import { TextArea, ContextForm, OptionsList, PrimaryHeader, TranslateCTA } from '.';
-import { languageMap, textConstants } from '../../constants';
+import { languageMap, locationToLanguageMap, textConstants } from '../../constants';
 import { useTranslation, useAudioAndTranscript } from '../../hooks';
 import { useAppContext } from '../../context/AppContext';
 import { TranslationContext, defaultContext} from '../../context/TranslationContext';
 
 function Translator() {
-    const { state, refresh } = useAppContext();
+    const { state, setState, refresh } = useAppContext();
     const [ selectedContext, setSelectedContext ] = useState<TranslationContext>(defaultContext);
     const [ selectedLang, setSelectedLang ] = useState(state.language);
     const [ inputTextToTranslate, setTextToTranslate ] = useState(state.textToTranslate);
     const [ shouldTranslate, setShouldTranslate ] = useState(false);
-
     const { translationJSON } = useTranslation(selectedContext, selectedLang, inputTextToTranslate, shouldTranslate);
     const { audioSrc, setAudioSrc, translationTranscript, setTranslationTranscript } = useAudioAndTranscript(translationJSON);
+
+    const handleContextChange = (updated: TranslationContext) => {
+        setSelectedContext(updated);
+        if (updated.location && locationToLanguageMap[updated.location]) {
+            const newLang = locationToLanguageMap[updated.location];
+            setSelectedLang(newLang);
+            setState(prev => ({ ...prev, language: newLang }));
+        }
+    }
 
     // state object is what changes, therefore syncing local state with context by tracking full object instead of inner properties
     useEffect(() => {
@@ -31,7 +39,7 @@ function Translator() {
                 <div className="translator__scrollable">
                     {!shouldTranslate ? (
                             <div className="translation-options">
-                                <ContextForm context={selectedContext} onChange={setSelectedContext} />
+                                <ContextForm context={selectedContext} onChange={handleContextChange} />
                                 <OptionsList type="language" headerText={textConstants.langOptionsHeader} optionsObj={languageMap} initChoice={selectedLang} hasIcon={true} callback={setSelectedLang} />
                             </div>
                         ) : (

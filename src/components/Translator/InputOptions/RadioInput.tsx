@@ -25,8 +25,8 @@ const RadioInput = <K extends string>({currSelect, cb, type, abbr, name, hasIcon
               name={type}
               value={abbr}
               checked={abbr === currSelect}
-              onChange={(e) => cb(e.target.value as K)} />
-            {name}
+              onChange={() => cb(abbr)} />
+            { name }
             { hasIcon && <img className={`${type}-select__image`} src={flagImgSrc} alt={`${name} flag`} /> }
         </label>
     )
