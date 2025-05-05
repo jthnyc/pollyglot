@@ -1,0 +1,26 @@
+.context-select {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    margin: 1rem 0;
+    
+    @media screen and (min-width: 769px) {
+        font-size: 1.25rem;
+        max-width: 50rem;
+        gap: 1.25rem 1.5rem;
+    }
+}
+
+.context-select__options {
+    display: flex;
+    gap: .75rem 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 20rem;
+
+    @media screen and (min-width: 769px) {
+        max-width: 50rem;
+        gap: 1.25rem 1.5rem;
+    }
+}

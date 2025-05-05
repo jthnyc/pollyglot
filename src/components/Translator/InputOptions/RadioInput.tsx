@@ -1,7 +1,7 @@
 import './RadioInput.css';
 import { flagImageMap } from "../../../assets";
 import { Abbreviation } from '../../../constants';
-import { isToneType, isFlagAbbreviation } from '../../../utils/utils';
+import { isFlagAbbreviation } from '../../../utils/utils';
 
 interface RadioInputProps<K extends string> {
     currSelect: K;
@@ -13,8 +13,7 @@ interface RadioInputProps<K extends string> {
 }  
 
 const RadioInput = <K extends string>({currSelect, cb, type, abbr, name, hasIcon}: RadioInputProps<K>) => {
-    const flagImgSrc =
-        !isToneType(type) && isFlagAbbreviation(abbr as Abbreviation)
+    const flagImgSrc = isFlagAbbreviation(abbr as Abbreviation)
             ? flagImageMap[abbr as keyof typeof flagImageMap]
             : '';
 

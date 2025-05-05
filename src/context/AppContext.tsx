@@ -1,10 +1,8 @@
 import { createContext, useState, useContext, PropsWithChildren } from "react";
-import { textConstants, toneMap, languageMap } from "../constants";
+import { textConstants, languageMap } from "../constants";
 
-type Tone = keyof typeof toneMap;
 type Language = keyof typeof languageMap;
 type AppState = {
-    tone: Tone;
     language: Language;
     textToTranslate: string;
     inputSectionTitle: string;
@@ -21,9 +19,8 @@ type AppContextType = {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export function AppProvider({ children }: PropsWithChildren<{}>) {
-    const { initialTone, initialLang, initialInputTitle, initialTranslationTitle, initialCTAText } = textConstants;
+    const { initialLang, initialInputTitle, initialTranslationTitle, initialCTAText } = textConstants;
     const initialState: AppState = {
-        tone: initialTone as Tone,
         language: initialLang as Language,
         textToTranslate: "",
         inputSectionTitle: initialInputTitle,

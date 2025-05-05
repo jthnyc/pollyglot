@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react';
 import './Translator.css';
-import { TextArea, OptionsList, PrimaryHeader, TranslateCTA } from '.';
-import { toneMap, languageMap, textConstants } from '../../constants';
+import { TextArea, ContextForm, OptionsList, PrimaryHeader, TranslateCTA } from '.';
+import { languageMap, textConstants } from '../../constants';
 import { useTranslation, useAudioAndTranscript } from '../../hooks';
 import { useAppContext } from '../../context/AppContext';
+import { TranslationContext, defaultContext} from '../../context/TranslationContext';
 
 function Translator() {
     const { state, refresh } = useAppContext();
-    const [ selectedTone, setSelectedTone ] = useState(state.tone);
+    const [ selectedContext, setSelectedContext ] = useState<TranslationContext>(defaultContext);
     const [ selectedLang, setSelectedLang ] = useState(state.language);
     const [ inputTextToTranslate, setTextToTranslate ] = useState(state.textToTranslate);
     const [ shouldTranslate, setShouldTranslate ] = useState(false);
 
-    const { translationJSON } = useTranslation(selectedTone, selectedLang, inputTextToTranslate, shouldTranslate);
+    const { translationJSON } = useTranslation(selectedContext, selectedLang, inputTextToTranslate, shouldTranslate);
     const { audioSrc, setAudioSrc, translationTranscript, setTranslationTranscript } = useAudioAndTranscript(translationJSON);
 
     // state object is what changes, therefore syncing local state with context by tracking full object instead of inner properties
     useEffect(() => {
-        setSelectedTone(state.tone);
         setSelectedLang(state.language);
-    }, [ state.tone, state.language])
-    
+    }, [ state.language])
 
     return (
         <div className="content">
@@ -32,8 +31,8 @@ function Translator() {
                 <div className="translator__scrollable">
                     {!shouldTranslate ? (
                             <div className="translation-options">
-                                <OptionsList type="tone" headerText={textConstants.toneOptionsHeader} optionsObj={toneMap} initChoice={selectedTone} hasIcon={false} callback={setSelectedTone} />
-                                    <OptionsList type="language" headerText={textConstants.langOptionsHeader} optionsObj={languageMap} initChoice={selectedLang} hasIcon={true} callback={setSelectedLang} />
+                                <ContextForm context={selectedContext} onChange={setSelectedContext} />
+                                <OptionsList type="language" headerText={textConstants.langOptionsHeader} optionsObj={languageMap} initChoice={selectedLang} hasIcon={true} callback={setSelectedLang} />
                             </div>
                         ) : (
                             <div className="translation">

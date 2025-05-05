@@ -3,3 +3,4 @@ export { default as OptionsList } from './InputOptions/OptionsList';
 export { default as RadioInput } from './InputOptions/RadioInput';
 export { default as PrimaryHeader } from './Headers/PrimaryHeader';
 export { default as TranslateCTA } from './Button/TranslateCTA';
+export { default as ContextForm } from './InputOptions/TranslationContextForm';

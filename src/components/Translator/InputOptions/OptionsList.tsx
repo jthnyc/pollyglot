@@ -2,7 +2,7 @@ import './OptionsList.css';
 import { PrimaryHeader, RadioInput } from '../index';
 
 type OptionsListProps<K extends string> = {
-    type: 'tone' | 'language';
+    type: 'tone' | 'language' | 'context';
     headerText: string;
     optionsObj: Record<K, string>;
     initChoice: K;

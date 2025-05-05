@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { languageMap, textConstants } from '../constants';
 import { useAppContext } from '../context/AppContext'; 
-import { ToneAbbreviation, FlagAbbreviation } from '../constants';
+import { TranslationContext } from '../context/TranslationContext';
+import { FlagAbbreviation } from '../constants';
 
-export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: FlagAbbreviation, textToTranslate: string, shouldTranslate: boolean) {
+export function useTranslation(translationContext: TranslationContext, selectedLang: FlagAbbreviation, textToTranslate: string, shouldTranslate: boolean) {
     const [ translationJSON, setTranslationJSON ] = useState(null);
     const [ hasError, setHasError ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
@@ -20,7 +21,16 @@ export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: Fla
                 const response = await fetch("/gpt", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ tone: selectedTone, prompt: textToTranslate, language: languageMap[selectedLang] }),
+                    body: JSON.stringify({ 
+                        tone: translationContext.tone, 
+                        prompt: textToTranslate, 
+                        language: languageMap[selectedLang],
+                        context: {
+                            location: translationContext.location,
+                            audience: translationContext.audience,
+                            goal: translationContext.goal
+                        }
+                    }),
                     signal
                 });
                 if (!response.ok) {
@@ -30,7 +40,7 @@ export function useTranslation(selectedTone: ToneAbbreviation, selectedLang: Fla
                 setTranslationJSON(data);
                 setState((prevState) => ({
                     ...prevState,
-                    tone: selectedTone,
+                    tone: translationContext.tone,
                     language: selectedLang,
                     textToTranslate: textToTranslate,
                     inputSectionTitle: textConstants.translatedInputTitle,
