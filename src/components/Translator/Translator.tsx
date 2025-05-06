@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Translator.css';
 import { TextArea, ContextForm, OptionsList, PrimaryHeader, TranslateCTA } from '.';
 import { languageMap, textConstants, languageToAbbr } from '../../constants';
@@ -7,8 +7,9 @@ import { useAppContext } from '../../context/AppContext';
 import { TranslationContext, defaultContext} from '../../context/TranslationContext';
 
 function Translator() {
-    const { state, setState, refresh } = useAppContext();
+    const { state, refresh } = useAppContext();
     const [ selectedContext, setSelectedContext ] = useState<TranslationContext>(defaultContext);
+    const [ currentLang, setCurrentLang ] = useState('');
     const [ dialectList, setDialectList ] = useState<string[]>([]);
     const [ selectedDialect, setSelectedDialect ] = useState('');
     const [ inputTextToTranslate, setTextToTranslate ] = useState(state.textToTranslate);
@@ -16,19 +17,27 @@ function Translator() {
     const { translationJSON } = useTranslation(selectedContext, selectedDialect, inputTextToTranslate, shouldTranslate);
     const { audioSrc, setAudioSrc, translationTranscript, setTranslationTranscript } = useAudioAndTranscript(translationJSON);
 
+    const initializeDialects = (currentLang: string) => {
+        setCurrentLang(currentLang);
+        const langAbbr = languageToAbbr[currentLang];
+        if (langAbbr) {
+            const dialects = languageMap[langAbbr].dialects;
+            setDialectList(dialects);     
+            setSelectedDialect(dialects[0]);       
+        }
+    }
+    
     const handleContextChange = (updated: TranslationContext) => {
         setSelectedContext(updated);
-        const langAbbr = languageToAbbr[updated.language];
-        if (updated.language && langAbbr) {
-            const dialects = languageMap[langAbbr].dialects;
-            setDialectList(dialects);
+        // only trigger dialect reselect if language changed
+        if (updated.language !== currentLang) {
+            initializeDialects(updated.language);
         }
     }
 
-    // state object is what changes, therefore syncing local state with context by tracking full object instead of inner properties
-    // useEffect(() => {
-    //     setSelectedLang(state.language);
-    // }, [ state.language ])
+    useEffect(() => {
+        initializeDialects(selectedContext.language);
+    }, [])
 
     return (
         <div className="content">

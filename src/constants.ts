@@ -146,19 +146,6 @@ export const textConstants = {
   refreshCTAText: "Start Over",
 };
 
-// export const locationToLanguageMap: Record<string, keyof typeof languageMap> = {
-//   Japan: 'jp',
-//   Canada: 'fr',
-//   France: 'fr',
-//   Switcherland: 'fr',
-//   Germany: 'de',
-//   Italy: 'it',
-//   Spain: 'sp',
-//   Philippines: 'ta',
-//   Taiwan: 'tw',
-//   Korea: 'kr'
-// }
-
 export const languageToAbbr: Record<string, LanguageAbbreviation> = {
   Chinese: 'ch',
   Spanish: 'sp',
