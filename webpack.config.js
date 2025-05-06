@@ -1,8 +1,12 @@
-const path = require('path');
-const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+import { fileURLToPath } from 'url';
+import path from 'path';
+import NodePolyfillPlugin from 'node-polyfill-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
   entry: './src/index.tsx', // Adjust this to your entry file
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -45,7 +49,7 @@ module.exports = {
   plugins: [
     new NodePolyfillPlugin(),
     new HtmlWebpackPlugin({
-        template: './public/index.html', // Use your existing index.html as a template
+        template: path.resolve(__dirname, 'public/index.html'),
         filename: 'index.html', // Output file in dist folder
       }),
   ],

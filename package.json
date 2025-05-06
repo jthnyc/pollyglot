@@ -1,7 +1,8 @@
 {
+  "type": "module",
   "scripts": {
-    "start": "npm run build && node completions.mjs",
-    "dev": "concurrently \"npm run watch\" \"nodemon completions.mjs\"",
+    "start": "npm run build && node backend/completions.mjs",
+    "dev": "concurrently \"npm run watch\" \"nodemon backend/completions.mjs\"",
     "build": "webpack",
     "watch": "webpack --watch"
   },
