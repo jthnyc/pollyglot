@@ -5,7 +5,6 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dialectHints } from './dialectHints.js';
-console.log(dialectHints["India"]);
 
 const app = express();
 

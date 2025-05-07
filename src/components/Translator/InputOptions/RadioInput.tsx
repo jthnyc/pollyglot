@@ -20,12 +20,12 @@ const RadioInput = ({currSelect, cb, type, abbr, name, hasIcon}: RadioInputProps
     return (
         <label className={`${type}-select__label`} htmlFor={abbr}>
             <input
-              type="radio"
-              id={abbr}
-              name={type}
-              value={abbr}
-              checked={abbr === currSelect}
-              onChange={() => cb(name)} />
+                type="radio"
+                id={abbr}
+                name={type}
+                value={abbr}
+                checked={abbr === currSelect}
+                onChange={() => cb(name)} />
             { name }
             {/* { hasIcon && <img className={`${type}-select__image`} src={flagImgSrc} alt={`${name} flag`} /> } */}
         </label>

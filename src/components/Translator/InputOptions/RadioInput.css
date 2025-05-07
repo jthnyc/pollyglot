@@ -1,5 +1,5 @@
 .tone-select__label,
-.language-select__label { 
+.dialect-select__label { 
     align-items: center;
     column-gap: 1rem;
     display: flex;
@@ -14,7 +14,7 @@
     }
 }
 
-.language-select__image {
+.dialect-select__image {
     border: 0.0625rem solid var(--primary-black);
     height: 1.25rem;
     width: 1.875rem;

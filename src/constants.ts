@@ -158,3 +158,79 @@ export const languageToAbbr: Record<string, LanguageAbbreviation> = {
   Korean: 'kr',
   Italian: 'it'
 }
+
+export const contextOptions = [
+  "Language",
+  "Tone",
+  "Speaking to",
+  "Goal/Intent"
+]
+
+export const languageOptions = [
+  "Chinese",
+  "Spanish",
+  "English",
+  "French",
+  "Arabic",
+  "Tagalog",
+  "Japanese",
+  "German",
+  "Korean",
+  "Italian",
+  "Constructed/Fictional"
+]
+
+export const audienceOptions = [
+  "Stranger",
+  "Friend",
+  "Shop owner",
+  "Waiter / Server",
+  "Authority figure",
+  "Elder",
+  "Coworker / Peer",
+  "Tour guide",
+  "Police / Security",
+  "Child",
+];
+
+export const goalOptions = [
+  "Ask for price",
+  "Ask for help",
+  "Make apology",
+  "Express gratitude",
+  "Order food or drink",
+  "Negotiate or bargain",
+  "Ask directions",
+  "Give directions",
+  "Start small talk",
+  "Give compliment",
+];
+
+export const toneOptions = [
+  "Formal",
+  "Friendly",
+  "Slang"
+]
+
+export const dropdownOptionsMap = {
+  Language: {
+    contextKey: "language",
+    hasDefaultValue: true,
+    options: languageOptions,
+  },
+  Tone: {
+    contextKey: "tone",
+    hasDefaultValue: true,
+    options: toneOptions,
+  },
+  "Speaking to": {
+    contextKey: "audience",
+    hasDefaultValue: false,
+    options: audienceOptions,
+  },
+  "Goal/Intent": {
+    contextKey: "goal",
+    hasDefaultValue: false,
+    options: goalOptions,
+  },
+} as const;

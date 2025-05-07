@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, PropsWithChildren } from "react";
-import { textConstants, languageMap } from "../constants";
+import { textConstants } from "../constants";
 
 type AppState = {
     textToTranslate: string;

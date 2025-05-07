@@ -1,10 +1,13 @@
 import { Hero, Translator } from './components';
+import { TranslationProvider } from './context/TranslationContext';
 
 function App() {
     return (
         <div className="main">
             <Hero />
-            <Translator />
+            <TranslationProvider>
+                <Translator />
+            </TranslationProvider>
         </div>
     )
 }

@@ -1,36 +1,23 @@
 import { useEffect, useState } from 'react';
 import './Translator.css';
 import { TextArea, ContextForm, OptionsList, PrimaryHeader, TranslateCTA } from '.';
-import { languageMap, textConstants, languageToAbbr } from '../../constants';
+import { textConstants } from '../../constants';
 import { useTranslation, useAudioAndTranscript } from '../../hooks';
-import { useAppContext } from '../../context/AppContext';
-import { TranslationContext, defaultContext} from '../../context/TranslationContext';
+import { useAppContext, TranslationContextState, useTranslationContext } from '../../context';
 
 function Translator() {
     const { state, refresh } = useAppContext();
-    const [ selectedContext, setSelectedContext ] = useState<TranslationContext>(defaultContext);
-    const [ currentLang, setCurrentLang ] = useState('');
-    const [ dialectList, setDialectList ] = useState<string[]>([]);
-    const [ selectedDialect, setSelectedDialect ] = useState('');
+    const { selectedContext, dialectList, updateContext, bulkUpdateContext, initializeDialects } = useTranslationContext();
     const [ inputTextToTranslate, setTextToTranslate ] = useState(state.textToTranslate);
     const [ shouldTranslate, setShouldTranslate ] = useState(false);
-    const { translationJSON } = useTranslation(selectedContext, selectedDialect, inputTextToTranslate, shouldTranslate);
+    const { translationJSON } = useTranslation(selectedContext, inputTextToTranslate, shouldTranslate);
     const { audioSrc, setAudioSrc, translationTranscript, setTranslationTranscript } = useAudioAndTranscript(translationJSON);
-
-    const initializeDialects = (currentLang: string) => {
-        setCurrentLang(currentLang);
-        const langAbbr = languageToAbbr[currentLang];
-        if (langAbbr) {
-            const dialects = languageMap[langAbbr].dialects;
-            setDialectList(dialects);     
-            setSelectedDialect(dialects[0]);       
-        }
-    }
     
-    const handleContextChange = (updated: TranslationContext) => {
-        setSelectedContext(updated);
+    const handleContextChange = (updated: Partial<TranslationContextState>) => {
+        const prevLang = selectedContext.language;
+        bulkUpdateContext(updated);
         // only trigger dialect reselect if language changed
-        if (updated.language !== currentLang) {
+        if (updated.language && updated.language !== prevLang) {
             initializeDialects(updated.language);
         }
     }
@@ -51,12 +38,12 @@ function Translator() {
                             <div className="translation-options">
                                 <ContextForm context={selectedContext} onChange={handleContextChange} />
                                 <OptionsList
-                                    type="language"
+                                    type="dialect"
                                     headerText={textConstants.langOptionsHeader}
                                     options={dialectList}
-                                    selectedDialect={selectedDialect}
+                                    selectedOption={selectedContext.dialect ?? ''}
                                     hasIcon={false}
-                                    callback={setSelectedDialect} />
+                                    callback={updateContext} />
                             </div>
                         ) : (
                             <div className="translation">

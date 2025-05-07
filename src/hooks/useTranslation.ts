@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { languageMap, textConstants, LanguageAbbreviation } from '../constants';
+import { textConstants } from '../constants';
 import { useAppContext } from '../context/AppContext'; 
-import { TranslationContext } from '../context/TranslationContext';
+import { TranslationContextState } from '../context/TranslationContext';
 
-export function useTranslation(translationContext: TranslationContext, selectedDialect: string, textToTranslate: string, shouldTranslate: boolean) {
+export function useTranslation(translationContext: TranslationContextState, textToTranslate: string, shouldTranslate: boolean) {
     const [ translationJSON, setTranslationJSON ] = useState(null);
     const [ hasError, setHasError ] = useState(false);
     const [ isLoading, setIsLoading ] = useState(false);
@@ -17,7 +17,7 @@ export function useTranslation(translationContext: TranslationContext, selectedD
                 prompt: ${textToTranslate}, 
                 language: ${translationContext.language},
                 context: {
-                    dialect: ${selectedDialect},
+                    dialect: ${translationContext.dialect},
                     tone: ${translationContext.tone},
                     audience: ${translationContext.audience},
                     goal: ${translationContext.goal}
@@ -34,7 +34,7 @@ export function useTranslation(translationContext: TranslationContext, selectedD
                         prompt: textToTranslate, 
                         language: translationContext.language,
                         context: {
-                            dialect: selectedDialect,
+                            dialect: translationContext.dialect,
                             tone: translationContext.tone,
                             audience: translationContext.audience,
                             goal: translationContext.goal
