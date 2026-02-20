@@ -13,19 +13,22 @@ const __dirname = path.dirname(__filename);
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
-});
-
-app.listen(3000, () => console.log('Server running on port 3000'));
-
+// Define /gpt route BEFORE app.listen()
 app.post('/gpt', async (req, res) => {
     let tone = req.body.tone;
     let prompt = req.body.prompt;
     let language = req.body.language;
     let response = await fetchTextCompletion(tone, prompt, language);
     res.send(response);
-})
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
+// Use Render's dynamic port
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
@@ -33,7 +36,7 @@ const openai = new OpenAI({
 
 export async function fetchTextCompletion(tone, prompt, language) {
     let completion = await openai.chat.completions.create({
-        model: process.env.OPENAI_API_MODEL,
+        model: process.env.OPENAI_API_MODEL || 'gpt-4o', // Added fallback
         modalities: ["text", "audio"],
         audio: { voice: "alloy", format: "mp3" },
         messages: [
@@ -47,7 +50,7 @@ export async function fetchTextCompletion(tone, prompt, language) {
             },
             {
                 role: 'user',
-                content: `Please translate the following sentence into ${language} in a ${tone} tone: ${prompt}. ${language === "Mandarin" ? 'Use Tranditional Chinese where applicable.' : ''}`,
+                content: `Please translate the following sentence into ${language} in a ${tone} tone: ${prompt}. ${language === "Mandarin" ? 'Use Traditional Chinese where applicable.' : ''}`,
             }
         ],
     });
