@@ -15,11 +15,21 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Define /gpt route BEFORE app.listen()
 app.post('/gpt', async (req, res) => {
-    let tone = req.body.tone;
-    let prompt = req.body.prompt;
-    let language = req.body.language;
-    let response = await fetchTextCompletion(tone, prompt, language);
-    res.send(response);
+    try {
+        let tone = req.body.tone;
+        let prompt = req.body.prompt;
+        let language = req.body.language;
+        
+        // Get translation with audio
+        let response = await fetchTextCompletionWithAudio(tone, prompt, language);
+        res.json(response);
+    } catch (error) {
+        console.error('Translation error:', error);
+        res.status(500).json({ 
+            error: 'Translation failed', 
+            message: error.message 
+        });
+    }
 });
 
 app.get('*', (req, res) => {
@@ -34,11 +44,11 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
-export async function fetchTextCompletion(tone, prompt, language) {
+export async function fetchTextCompletionWithAudio(tone, prompt, language) {
+    // Single API call for both text translation AND audio
     let completion = await openai.chat.completions.create({
-        model: process.env.OPENAI_API_MODEL || 'gpt-4o', // Added fallback
-        modalities: ["text", "audio"],
-        audio: { voice: "alloy", format: "mp3" },
+        model: 'gpt-4o-mini',
+        modalities: ["text"],
         messages: [
             { 
                 role: "system", 
@@ -54,5 +64,11 @@ export async function fetchTextCompletion(tone, prompt, language) {
             }
         ],
     });
-    return completion.choices[0].message;
+
+    const message = completion.choices[0].message;
+
+    return {
+        content: message.content,  // Text translation
+        audio: message.audio  // Audio with data and transcript
+    };
 }
