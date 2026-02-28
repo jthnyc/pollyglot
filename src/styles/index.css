@@ -44,7 +44,7 @@ button:focus {
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.1;
-    height: 100vh;
+    min-height: 100vh; /* Changed from height */
 
     @media screen and (max-width: 380px) {
         font-size: 0.9rem;
@@ -52,8 +52,6 @@ button:focus {
 
     @media screen and (min-width: 769px) {
         font-size: 1.5rem;
-        height: auto;
         min-height: 100dvh;
-        overflow: visible;
     }
 }

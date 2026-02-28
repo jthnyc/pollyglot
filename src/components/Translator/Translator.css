@@ -30,7 +30,8 @@
 .translation-input,
 .tone-select,
 .language-select,
-.translation {
+.translation,
+.translator__scrollable {
     display: flex;
     flex-direction: column;
     padding: 0.25rem 1.5rem;
@@ -46,6 +47,16 @@
     flex-direction: column;
     min-height: 0;
     overflow: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .translator__scrollable {
+        padding-bottom: 0.5rem;
+    }
+    
+    .translation-options {
+        gap: 0.75rem;
+    }
 }
 
 .translation-options,

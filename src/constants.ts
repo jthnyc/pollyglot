@@ -1,12 +1,23 @@
-export type ToneAbbreviation = 'formal' | 'friendly' | 'slang';
+export type ToneAbbreviation = 'formal' | 'friendly' | 'slang' | 'romantic' | 'humorous' | 'empathetic';
 export const toneMap: Record<ToneAbbreviation, string> = {
     formal: "Formal",
     friendly: "Friendly",
-    slang: "Slang"
-  };
+    slang: "Slang",
+    romantic: "Romantic",
+    humorous: "Humorous",
+    empathetic: "Empathetic"
+};
 
-export type FlagAbbreviation = 'de' | 'es' | 'fr' | 'it' | 'jp' | 'kl' | 'sp' | 'ta' | 'tw';
+export type FlagAbbreviation = 
+  // Original languages
+  | 'de' | 'es' | 'fr' | 'it' | 'jp' | 'sp' | 'ta' | 'tw'
+  // New real languages
+  | 'kr' | 'pt' | 'gr' | 'hu' | 'ru' | 'sa' | 'in'
+  // Fantasy languages
+  | 'kl' | 'qu' | 'val';
+
 export const languageMap: Record<FlagAbbreviation, string> = {
+  // Original languages
   fr: "French",
   sp: "Spanish",
   jp: "Japanese",
@@ -14,8 +25,21 @@ export const languageMap: Record<FlagAbbreviation, string> = {
   it: "Italian",
   tw: "Mandarin",
   ta: "Tagalog",
+  
+  // New real languages
+  kr: "Korean",
+  pt: "Portuguese",
+  gr: "Greek",
+  hu: "Hungarian",
+  ru: "Russian",
+  sa: "Arabic",
+  in: "Hindi",
+  
+  // Fantasy/Constructed languages
   kl: "Klingon",
+  qu: "Quenya (Elvish)",
   es: "Esperanto",
+  val: "High Valyrian"
 };
 
 export type Abbreviation = ToneAbbreviation | FlagAbbreviation;
@@ -32,4 +56,25 @@ export const textConstants = {
   initialCTAText: "Translate",
   refreshCTAText: "Start Over",
 };
-  
+
+// Reverse mapping: language name → abbreviation
+export const languageToAbbr: Record<string, FlagAbbreviation> = {
+  'French': 'fr',
+  'Spanish': 'sp',
+  'Japanese': 'jp',
+  'German': 'de',
+  'Italian': 'it',
+  'Mandarin': 'tw',
+  'Tagalog': 'ta',
+  'Korean': 'kr',
+  'Portuguese': 'pt',
+  'Greek': 'gr',
+  'Hungarian': 'hu',
+  'Russian': 'ru',
+  'Arabic': 'sa',
+  'Hindi': 'in',
+  'Klingon': 'kl',
+  'Quenya (Elvish)': 'qu',
+  'Esperanto': 'es',
+  'High Valyrian': 'val'
+};

@@ -5,18 +5,21 @@
     box-sizing: border-box;
     font-size: 1rem;
     line-height: 1.5;
-    max-height: 30vh;
-    min-height: 12rem;
+    max-height: 20vh; /* REDUCED - was 30vh */
+    min-height: 6rem; /* MUCH SHORTER - was 12rem */
     padding: 0.75rem;
     resize: none;
     width: 100%;
 
     @media screen and (max-width: 380px) {
         font-size: 0.9rem;
-        min-height: 8rem;
+        min-height: 5rem; /* SHORTER - was 8rem */
+        max-height: 18vh;
     }
 
     @media screen and (min-width: 769px) {
         font-size: 1.25rem;
+        min-height: 7rem; /* REDUCED - was 12rem */
+        max-height: 22vh;
     }
 }
