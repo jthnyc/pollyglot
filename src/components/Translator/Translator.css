@@ -49,17 +49,12 @@
     overflow: hidden;
 }
 
-@media screen and (max-width: 768px) {
-    .translator__scrollable {
-        padding-bottom: 0.5rem;
-    }
-    
-    .translation-options {
-        gap: 0.75rem;
-    }
+.translation-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.translation-options,
 .translation {
     display: flex;
     flex-direction: column;
@@ -166,6 +161,19 @@
     border-radius: 10px;
 }
 
+@media screen and (min-width: 769px) {
+    .translation-options {
+        flex-grow: 1;
+        min-height: 0;
+    }
+
+    .tone-select,
+    .language-select {
+        flex: 1;
+        min-height: 0;
+    }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .audio-controls {
@@ -179,5 +187,13 @@
 
     .translation__audio {
         max-width: 100%;
+    }
+
+    .translator__scrollable {
+        padding-bottom: 0.5rem;
+    }
+    
+    .translation-options {
+        gap: 0.75rem;
     }
 }

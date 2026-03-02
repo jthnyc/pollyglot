@@ -78,3 +78,30 @@ export const languageToAbbr: Record<string, FlagAbbreviation> = {
   'Esperanto': 'es',
   'High Valyrian': 'val'
 };
+
+export type TranslationContextState = {
+  language: string;
+  audience?: string;
+  goal?: string;
+  tone: string;
+  dialect?: string;
+};
+
+type DropdownOption = {
+  contextKey: keyof TranslationContextState;
+  hasDefaultValue: boolean;
+  options: string[];
+};
+
+export const dropdownOptionsMap: Record<string, DropdownOption> = {
+  Audience: {
+    contextKey: 'audience',
+    hasDefaultValue: true,
+    options: ['General', 'Children', 'Academic', 'Professional', 'Elderly'],
+  },
+  Goal: {
+    contextKey: 'goal',
+    hasDefaultValue: true,
+    options: ['Casual Chat', 'Business', 'Travel', 'Education', 'Creative'],
+  },
+};

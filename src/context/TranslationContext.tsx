@@ -1,13 +1,6 @@
 import { createContext, useContext, useState, PropsWithChildren} from 'react';
 import { languageMap, languageToAbbr } from '../constants';
-
-export type TranslationContextState = {
-  language: string;
-  audience?: string;
-  goal?: string;
-  tone: string;
-  dialect?: string;
-};
+import type { TranslationContextState } from '../constants';
 
 type TranslationContextValue = {
   selectedContext: TranslationContextState;
@@ -37,17 +30,13 @@ export const TranslationProvider = ({ children }: PropsWithChildren<{}>) => {
   };
 
   const initializeDialects = (newLang: string) => {
-      const langAbbr = languageToAbbr[newLang];
-      if (langAbbr) {
-          const dialects = languageMap[langAbbr].dialects;
-          setDialectList(dialects);     
-          setSelectedContext(prev => ({
-            ...prev,
-            language: newLang,
-            dialect: dialects[0]
-          }))      
-      }
-  }
+    setDialectList([]); // no dialects for now
+    setSelectedContext(prev => ({
+      ...prev,
+      language: newLang,
+      dialect: undefined,
+    }));
+  };
 
   return (
     <TranslationContext.Provider value={{ selectedContext, dialectList, initializeDialects, updateContext, bulkUpdateContext }}>

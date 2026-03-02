@@ -62,27 +62,29 @@ const OptionsList = <K extends string>({
     return (
         <div className={`${type}-select picker-container`}>
             <PrimaryHeader headerText={headerText} />
-            <div className={`${type}-select__options-wrapper picker-scroll-container`}>
-                <div className={`${type}-select__options picker-list`}>
-                    {/* Real languages/tones */}
-                    {realOptions.map(option => renderOption(option, false))}
-                    
-                    {/* Fantasy divider and options */}
-                    {fantasyOptions.length > 0 && (
-                        <>
-                            <div className="fantasy-divider">
-                                <div className="fantasy-divider__ornament">✦</div>
-                                <div className="fantasy-divider__content">
-                                    <div className="fantasy-divider__glow"></div>
-                                    <span className="fantasy-divider__text">
-                                        ～･ﾟ✧ Of Myths and Legends ✧ﾟ･～
-                                    </span>
+            <div className="picker-scroll-wrapper">
+                <div className={`${type}-select__options-wrapper picker-scroll-container`}>
+                    <div className={`${type}-select__options picker-list`}>
+                        {/* Real languages/tones */}
+                        {realOptions.map(option => renderOption(option, false))}
+                        
+                        {/* Fantasy divider and options */}
+                        {fantasyOptions.length > 0 && (
+                            <>
+                                <div className="fantasy-divider">
+                                    <div className="fantasy-divider__ornament">✦</div>
+                                    <div className="fantasy-divider__content">
+                                        <div className="fantasy-divider__glow"></div>
+                                        <span className="fantasy-divider__text">
+                                            ～･ﾟ✧ Of Myths and Legends ✧ﾟ･～
+                                        </span>
+                                    </div>
+                                    <div className="fantasy-divider__ornament">✦</div>
                                 </div>
-                                <div className="fantasy-divider__ornament">✦</div>
-                            </div>
-                            {fantasyOptions.map(option => renderOption(option, true))}
-                        </>
-                    )}
+                                {fantasyOptions.map(option => renderOption(option, true))}
+                            </>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
