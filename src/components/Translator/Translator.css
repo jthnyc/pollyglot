@@ -30,7 +30,6 @@
 .translation-input,
 .tone-select,
 .language-select,
-.translation,
 .translator__scrollable {
     display: flex;
     flex-direction: column;
@@ -60,6 +59,7 @@
     flex-direction: column;
     flex-grow: 1;
     min-height: 0;
+    /* No horizontal padding — inherits from .translator__scrollable */
 }
 
 .translation__audio {
