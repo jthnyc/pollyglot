@@ -47,6 +47,7 @@ module.exports = {
     new HtmlWebpackPlugin({
         template: './public/index.html', // Use your existing index.html as a template
         filename: 'index.html', // Output file in dist folder
+        favicon: './public/parrot.png',
       }),
   ],
 };
